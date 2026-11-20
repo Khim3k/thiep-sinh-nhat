@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chúc Mừng Sinh Nhật - Món Quà Bí Mật</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Quicksand & Dancing Script -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
     <style>
@@ -28,9 +24,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        .font-script {
-            font-family: var(--font-script);
-        }
+        .font-script { font-family: var(--font-script); }
 
         .bg-night-warm {
             background: radial-gradient(circle at 50% 45%, #2b193d 0%, #160c24 60%, #090510 100%);
@@ -53,80 +47,39 @@
             pointer-events: none;
         }
 
-        @keyframes flicker {
-            0%, 100% {
-                transform: translateX(-50%) scale(1) rotate(-2deg);
-                filter: drop-shadow(0 0 12px #ff9d00) drop-shadow(0 0 24px #ff5500);
-            }
-            25% {
-                transform: translateX(-50%) scale(1.06, 0.95) rotate(2deg);
-                filter: drop-shadow(0 0 16px #ffb700) drop-shadow(0 0 30px #ff6600);
-            }
-            50% {
-                transform: translateX(-50%) scale(0.96, 1.05) rotate(-1deg);
-                filter: drop-shadow(0 0 10px #ff8800) drop-shadow(0 0 20px #ff4400);
-            }
-            75% {
-                transform: translateX(-50%) scale(1.04, 0.98) rotate(3deg);
-                filter: drop-shadow(0 0 18px #ffcc00) drop-shadow(0 0 32px #ff7700);
-            }
-        }
-
-        .candle-flame {
+        .cake-glow {
             position: absolute;
-            top: -34px;
+            top: -72px;
             left: 50%;
             transform: translateX(-50%);
-            width: 18px;
-            height: 30px;
-            background: radial-gradient(ellipse at bottom, #ffffff 10%, #fff066 40%, #ff8c00 80%, #ff3300 100%);
-            border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
-            animation: flicker 1.2s infinite alternate ease-in-out;
-            cursor: pointer;
-            z-index: 20;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .candle-flame::after {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
-            border-radius: 50%;
-        }
-
-        /* Bánh kem và nến được làm nổi khối, lung linh hơn */
-        .cake-glow {
             width: min(420px, 92vw);
             height: 250px;
-            top: -72px;
             background: radial-gradient(ellipse at center, rgba(255, 184, 219, 0.24) 0%, rgba(255, 193, 91, 0.16) 38%, transparent 72%);
             filter: blur(5px);
+            pointer-events: none;
+            transition: opacity 1s ease;
+            z-index: 1;
         }
 
+        /* ĐẶT CHÂN NẾN NẰM PHÍA SAU TẦNG BÁNH TRÊN */
         #candles-container {
-            filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.18));
-            gap: 1.35rem;
             position: absolute;
-            z-index: 0;
             left: 50%;
-            top: 8px;
+            top: 2px;
             transform: translateX(-50%);
-            order: 0;
+            z-index: 5;
+            gap: 1.35rem;
             margin: 0;
             padding: 0;
+            filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.18));
             pointer-events: none;
         }
 
-        #candles-container > div {
-            pointer-events: auto;
-        }
+        #candles-container > div { pointer-events: auto; }
 
         @media (max-width: 640px) {
             #candles-container {
-                top: 8px;
+                top: -10px;
                 gap: 1.1rem;
             }
         }
@@ -136,29 +89,24 @@
             box-shadow: inset 3px 0 5px rgba(255,255,255,.72), inset -3px 0 6px rgba(190,24,93,.12), 0 5px 9px rgba(0,0,0,.2);
         }
 
-        /* Ngọn lửa đặt chắc chắn phía trên tim nến, luôn hiển thị rõ */
-        #candles-container .candle-flame {
+        .candle-flame {
             position: absolute;
-            /* Canh ngọn lửa ngay trên tim nến, tránh bị lệch khỏi thân nến */
             top: -20px;
             left: 50%;
-            display: block;
             width: 17px;
             height: 26px;
-            opacity: 1;
-            visibility: visible;
             transform: translateX(-50%);
             transform-origin: 50% 90%;
             border-radius: 55% 45% 52% 48% / 68% 68% 32% 32%;
             background: radial-gradient(ellipse at 50% 72%, #fff 0 12%, #fff8b5 24%, #ffd54a 49%, #ff922e 73%, #f04438 100%);
             box-shadow: 0 0 8px 3px rgba(255, 184, 48, .4), 0 0 19px 7px rgba(255, 112, 35, .18);
             animation: candleFlameFlicker 1.35s ease-in-out infinite alternate;
+            cursor: pointer;
             z-index: 30;
-            pointer-events: auto;
-            display: block;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        #candles-container .candle-flame::before {
+        .candle-flame::before {
             content: '';
             position: absolute;
             width: 5px;
@@ -171,27 +119,26 @@
             transform: rotate(8deg);
         }
 
+        .candle-flame::after {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            border-radius: 50%;
+        }
+
         @keyframes candleFlameFlicker {
             from { transform: translateX(-50%) scale(.94, 1.03) rotate(-3deg); }
             to { transform: translateX(-50%) scale(1.04, .96) rotate(3deg); }
         }
 
-        #candles-container .candle-flame[style*="opacity: 0"] {
+        .candle-flame[style*="opacity: 0"] {
             animation: none;
             visibility: hidden;
         }
 
-        .candle-flame::before {
-            content: '';
-            position: absolute;
-            width: 7px;
-            height: 17px;
-            left: 6px;
-            top: 7px;
-            border-radius: 50%;
-            background: rgba(255,255,255,.82);
-            filter: blur(1px);
-            transform: rotate(8deg);
+        .cake-wrapper {
+            position: relative;
+            z-index: 20;
         }
 
         .cake-art {
@@ -217,18 +164,9 @@
         }
 
         @keyframes smokeRise {
-            0% {
-                opacity: 0.85;
-                transform: translateX(-50%) translateY(0) scale(0.5);
-            }
-            50% {
-                opacity: 0.5;
-                transform: translateX(-35%) translateY(-28px) scale(1.3);
-            }
-            100% {
-                opacity: 0;
-                transform: translateX(-65%) translateY(-60px) scale(2);
-            }
+            0% { opacity: 0.85; transform: translateX(-50%) translateY(0) scale(0.5); }
+            50% { opacity: 0.5; transform: translateX(-35%) translateY(-28px) scale(1.3); }
+            100% { opacity: 0; transform: translateX(-65%) translateY(-60px) scale(2); }
         }
 
         .candle-smoke {
@@ -244,18 +182,6 @@
             animation: smokeRise 2.2s forwards ease-out;
         }
 
-        .cake-glow {
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 260px;
-            height: 160px;
-            background: radial-gradient(circle, rgba(255, 190, 80, 0.28) 0%, rgba(255, 120, 50, 0.08) 50%, transparent 75%);
-            pointer-events: none;
-            transition: opacity 1s ease;
-        }
-
         .sky-balloon {
             position: fixed;
             left: 0;
@@ -265,7 +191,7 @@
             touch-action: manipulation;
             user-select: none;
             will-change: transform;
-            z-index: 42;
+            z-index: 45;
             transition: filter 0.2s ease;
             filter: drop-shadow(0 8px 14px rgba(255, 255, 255, 0.12));
         }
@@ -275,10 +201,6 @@
             z-index: 48;
         }
 
-        .sky-balloon.wish-balloon {
-            z-index: 45;
-        }
-
         .sky-balloon-visual {
             display: flex;
             flex-direction: column;
@@ -286,10 +208,7 @@
             transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
         }
 
-        .sky-balloon:hover .sky-balloon-visual {
-            transform: scale(1.1);
-        }
-
+        .sky-balloon:hover .sky-balloon-visual { transform: scale(1.1); }
         .sky-balloon.popping .sky-balloon-visual {
             transform: scale(1.55) !important;
             opacity: 0 !important;
@@ -307,14 +226,8 @@
         }
 
         @keyframes letterOpen {
-            0% {
-                opacity: 0;
-                transform: scale(0.7) translateY(30px) rotateX(15deg);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0) rotateX(0deg);
-            }
+            0% { opacity: 0; transform: scale(0.7) translateY(30px) rotateX(15deg); }
+            100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0deg); }
         }
 
         .letter-modal-content {
@@ -330,38 +243,24 @@
             transform: translateY(-2px);
         }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(244, 114, 182, 0.4);
-            border-radius: 999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(244, 114, 182, 0.7);
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(244, 114, 182, 0.4); border-radius: 999px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(244, 114, 182, 0.7); }
     </style>
 </head>
 <body class="bg-night-warm text-white min-h-screen relative overflow-x-hidden">
 
-    <!-- Nền sao lấp lánh -->
     <div id="starfield" class="fixed inset-0 pointer-events-none z-0"></div>
-
-    <!-- Lớp phủ Bóng Bay Toàn Màn Hình -->
-    <div id="balloonLayer" style="position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; overflow: visible; z-index: 60;"></div>
-
-    <!-- Thông báo Toast -->
+    <div id="balloonLayer" class="fixed inset-0 w-screen h-screen pointer-events-none overflow-visible z-[60]"></div>
     <div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 pointer-events-none w-[90%] max-w-md"></div>
 
     <!-- Thanh điều khiển góc trên -->
-    <header id="top-bar" class="fixed top-0 left-0 right-0 z-50 px-4 py-3 flex items-center justify-between pointer-events-none">
-        <div class="flex items-center gap-2 pointer-events-auto">
+    <header class="fixed top-0 left-0 right-0 z-50 px-4 py-3 flex items-center justify-between pointer-events-none">
+        <div class="pointer-events-auto">
             <span id="sync-badge" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 backdrop-blur-md border border-white/15 text-pink-200">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Đã đồng bộ đám mây</span>
+                <span>Đã đồng bộ dữ liệu</span>
             </span>
         </div>
 
@@ -383,9 +282,7 @@
         </div>
     </header>
 
-    <!-- ===================================================================== -->
-    <!-- MÀN HÌNH 1: PASSWORD GATE                                             -->
-    <!-- ===================================================================== -->
+    <!-- MÀN HÌNH 1: PASSWORD GATE -->
     <main id="view-login" class="relative z-30 min-h-screen flex items-center justify-center p-4">
         <div class="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-7 sm:p-9 shadow-2xl text-center relative overflow-hidden">
             <div class="absolute -top-20 -right-20 w-44 h-44 bg-pink-500/25 rounded-full blur-3xl pointer-events-none"></div>
@@ -398,14 +295,10 @@
             <h1 class="font-script text-4xl sm:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-amber-200 to-rose-200 mb-2">
                 Hộp Quà Bí Mật
             </h1>
-            <p class="text-sm sm:text-base text-pink-100/90 mb-1">
-                Hôm nay là bao nhiêu?
-            </p>
-            <p class="text-xs sm:text-sm text-pink-100/60 mb-6">
-                viết dưới dạng số liên tiếp nhau
-            </p>
+            <p class="text-sm sm:text-base text-pink-100/90 mb-1">Hôm nay là bao nhiêu?</p>
+            <p class="text-xs sm:text-sm text-pink-100/60 mb-6">viết dưới dạng số liên tiếp nhau</p>
 
-            <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+            <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div class="relative">
                     <input type="password" id="password-input" autocomplete="off"
                         placeholder="Nhập mật khẩu tại đây..."
@@ -422,31 +315,14 @@
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                 </button>
             </form>
-
-            <div class="mt-6 pt-4 border-t border-white/10">
-                <button type="button" onclick="toggleHint()"
-                    class="text-xs text-pink-200/70 hover:text-pink-200 inline-flex items-center gap-1.5 transition cursor-pointer">
-                    <i class="fa-regular fa-circle-question"></i>
-                    <span>Hướng dẫn & Mật khẩu mặc định lần đầu</span>
-                </button>
-
-                <div id="password-hint-box" class="hidden mt-3 p-3.5 rounded-2xl bg-black/35 border border-white/10 text-left text-xs text-pink-100/85 space-y-1.5">
-                    <p><strong class="text-amber-300">• Người nhận (Xem thiệp & bánh kem):</strong> nhập <code class="px-1.5 py-0.5 rounded bg-white/15 text-white font-mono">sinhnhat</code></p>
-                    <p><strong class="text-pink-300">• Người tạo (Chỉnh sửa nội dung, nhạc & thư):</strong> nhập <code class="px-1.5 py-0.5 rounded bg-white/15 text-white font-mono">admin123</code></p>
-                    <p class="text-[11px] text-white/50 italic pt-1">* Bạn có thể đổi cả 2 mật khẩu này trong trang Quản trị (Creator).</p>
-                </div>
-            </div>
         </div>
     </main>
 
-    <!-- ===================================================================== -->
-    <!-- MÀN HÌNH 2: VIEWER EXPERIENCE                                        -->
-    <!-- ===================================================================== -->
+    <!-- MÀN HÌNH 2: VIEWER EXPERIENCE -->
     <section id="view-viewer" class="hidden relative z-30 min-h-screen flex flex-col items-center justify-between pt-16 pb-10 px-4">
-
         <div class="text-center max-w-2xl mx-auto mt-2 sm:mt-4 z-30">
             <div id="recipient-badge" class="inline-block px-4 py-1 rounded-full bg-pink-500/20 border border-pink-400/30 text-pink-200 text-xs sm:text-sm font-semibold mb-2 tracking-wide">
-                Dành tặng người đặc biệt
+                Chúc mừng Dương đến với tuối 16 ✨
             </div>
             <h1 id="viewer-main-title" class="font-script text-4xl sm:text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-pink-200 to-rose-300 drop-shadow-lg leading-tight">
                 Chúc Mừng Sinh Nhật!
@@ -460,41 +336,40 @@
         </div>
 
         <div class="relative w-full max-w-5xl flex-1 flex flex-col items-center justify-center my-4">
-            <div class="relative flex flex-col items-center justify-center mt-6 select-none">
+            <div class="relative flex flex-col items-center justify-center mt-10 select-none">
                 <div id="cake-aura" class="cake-glow"></div>
 
+                <!-- 3 Cây nến (Giấu chân nến sau tầng bánh trên) -->
                 <div id="candles-container" onclick="blowOutCandles()" title="Chạm để thổi nến!"
-                    class="relative z-30 flex items-end justify-center gap-5 sm:gap-7 cursor-pointer group p-3 overflow-visible">
+                    class="flex items-end justify-center cursor-pointer group p-3 overflow-visible">
                     <div class="relative flex flex-col items-center">
                         <div class="candle-flame" data-flame></div>
-                        <div class="smoke-anchor"></div>
                         <div class="w-1 h-2.5 bg-gray-800 rounded-full"></div>
-                        <div class="w-3.5 sm:w-4 h-12 sm:h-14 rounded-t-md bg-gradient-to-b from-pink-300 via-white to-pink-200 border border-pink-300/40 shadow-md relative overflow-hidden">
+                        <div class="w-3.5 sm:w-4 h-16 sm:h-20 rounded-t-md bg-gradient-to-b from-pink-300 via-white to-pink-200 border border-pink-300/40 shadow-md relative overflow-hidden">
                             <div class="w-full h-2 bg-rose-400/60 mt-2 -rotate-12"></div>
                             <div class="w-full h-2 bg-rose-400/60 mt-3 -rotate-12"></div>
                         </div>
                     </div>
-                    <div class="relative flex flex-col items-center -translate-y-1.5">
+                    <div class="relative flex flex-col items-center -translate-y-2">
                         <div class="candle-flame" data-flame></div>
-                        <div class="smoke-anchor"></div>
                         <div class="w-1 h-2.5 bg-gray-800 rounded-full"></div>
-                        <div class="w-4 sm:w-4.5 h-14 sm:h-16 rounded-t-md bg-gradient-to-b from-amber-200 via-white to-amber-100 border border-amber-300/40 shadow-md relative overflow-hidden">
+                        <div class="w-4 sm:w-4.5 h-20 sm:h-24 rounded-t-md bg-gradient-to-b from-amber-200 via-white to-amber-100 border border-amber-300/40 shadow-md relative overflow-hidden">
                             <div class="w-full h-2 bg-amber-400/70 mt-2.5 -rotate-12"></div>
                             <div class="w-full h-2 bg-amber-400/70 mt-3.5 -rotate-12"></div>
                         </div>
                     </div>
                     <div class="relative flex flex-col items-center">
                         <div class="candle-flame" data-flame></div>
-                        <div class="smoke-anchor"></div>
                         <div class="w-1 h-2.5 bg-gray-800 rounded-full"></div>
-                        <div class="w-3.5 sm:w-4 h-12 sm:h-14 rounded-t-md bg-gradient-to-b from-sky-200 via-white to-sky-100 border border-sky-300/40 shadow-md relative overflow-hidden">
+                        <div class="w-3.5 sm:w-4 h-16 sm:h-20 rounded-t-md bg-gradient-to-b from-sky-200 via-white to-sky-100 border border-sky-300/40 shadow-md relative overflow-hidden">
                             <div class="w-full h-2 bg-sky-400/60 mt-2 -rotate-12"></div>
                             <div class="w-full h-2 bg-sky-400/60 mt-3 -rotate-12"></div>
                         </div>
                     </div>
                 </div>
 
-                <div onclick="blowOutCandles()" class="relative z-10 order-1 cursor-pointer transition-transform duration-300 hover:scale-[1.02]">
+                <!-- Bánh kem SVG (Đè lên phần chân nến) -->
+                <div onclick="blowOutCandles()" class="cake-wrapper cursor-pointer transition-transform duration-300 hover:scale-[1.02]">
                     <svg class="cake-art w-64 sm:w-80 md:w-96 h-auto" viewBox="0 0 360 250" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <ellipse cx="180" cy="228" rx="168" ry="19" fill="#8B5CF6" opacity=".22"/>
                         <ellipse cx="180" cy="222" rx="160" ry="17" fill="#FBCFE8"/>
@@ -570,7 +445,7 @@
 
             <div class="mt-4 max-w-xl mx-auto text-center px-4">
                 <p id="viewer-sub-message" class="text-base sm:text-lg text-pink-100/90 leading-relaxed font-medium">
-                    Chúc bạn một tuổi mới thật rực rỡ, bình an, luôn mỉm cười hạnh phúc và đạt được mọi ước mơ trong cuộc sống!
+                    Chúc Dương sang tuổi mới vẫn luôn vui vẻ hạnh phúc!
                 </p>
             </div>
         </div>
@@ -582,19 +457,13 @@
             </button>
             <button onclick="launchAllWishBalloons()" class="px-4 py-2.5 rounded-full bg-amber-500/25 hover:bg-amber-500/40 border border-amber-300/35 text-xs sm:text-sm font-medium flex items-center gap-2 transition cursor-pointer">
                 <i class="fa-solid fa-envelope-open-text text-amber-300"></i>
-                <span>Thả thêm bóng lời chúc (<span id="letter-count-badge">0</span> màu)</span>
-            </button>
-            <button onclick="spawnDecorativeBalloons(14)" class="px-4 py-2.5 rounded-full bg-pink-500/25 hover:bg-pink-500/40 border border-pink-400/30 text-xs sm:text-sm font-medium flex items-center gap-2 transition cursor-pointer">
-                <i class="fa-solid fa-wand-sparkles text-pink-300"></i>
-                <span>Thả bóng bay rợp trời</span>
+                <span>Thả thêm bóng lời chúc (<span id="letter-count-badge">0</span> lời chúc)</span>
             </button>
         </div>
     </section>
 
-    <!-- ===================================================================== -->
-    <!-- MODAL ĐỌC BỨC THƯ LỜI CHÚC                                            -->
-    <!-- ===================================================================== -->
-    <div id="letter-modal" class="hidden fixed inset-0 z-[80] bg-black/75 backdrop-blur-md flex items-center justify-center p-4" onclick="closeLetterModal(event)">
+    <!-- MODAL ĐỌC BỨC THƯ LỜI CHÚC -->
+    <div id="letter-modal" class="hidden fixed inset-0 z-[80] bg-black/75 backdrop-blur-md flex items-center justify-center p-4" onclick="closeLetterModal()">
         <div class="letter-modal-content w-full max-w-lg bg-[#fffaf5] text-slate-800 rounded-3xl shadow-2xl overflow-hidden border-4 border-amber-200 relative" onclick="event.stopPropagation()">
             <button onclick="closeLetterModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/20 hover:bg-black/35 text-white flex items-center justify-center transition z-10 cursor-pointer">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -602,7 +471,7 @@
 
             <div id="modal-letter-header" class="bg-gradient-to-r from-rose-500 to-pink-500 px-6 py-5 text-white transition-colors duration-300">
                 <div class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest text-white/95 mb-1.5">
-                    <span id="modal-balloon-color-badge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 font-bold text-[11px]">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/25 font-bold text-[11px]">
                         <span id="modal-balloon-dot" class="w-2.5 h-2.5 rounded-full bg-pink-300 border border-white"></span>
                         <span id="modal-balloon-color-name">Bóng Hồng Phấn</span>
                     </span>
@@ -618,8 +487,7 @@
                     <img id="modal-letter-image" src="" alt="Kỷ niệm sinh nhật" class="w-full max-h-64 object-cover" onerror="this.parentElement.classList.add('hidden')">
                 </div>
 
-                <div id="modal-letter-body" class="text-slate-700 text-base sm:text-lg leading-relaxed whitespace-pre-line font-medium">
-                </div>
+                <div id="modal-letter-body" class="text-slate-700 text-base sm:text-lg leading-relaxed whitespace-pre-line font-medium"></div>
 
                 <div class="pt-4 border-t border-rose-100 flex items-center justify-between text-sm text-rose-600 font-semibold">
                     <span>🎈 Chạm bóng khác để khám phá thêm!</span>
@@ -631,9 +499,7 @@
         </div>
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- MÀN HÌNH 3: CREATOR DASHBOARD                                        -->
-    <!-- ===================================================================== -->
+    <!-- MÀN HÌNH 3: CREATOR DASHBOARD -->
     <section id="view-creator" class="hidden relative z-30 min-h-screen pt-16 pb-16 px-4">
         <div class="max-w-4xl mx-auto space-y-6">
 
@@ -644,7 +510,7 @@
                         <span>CHẾ ĐỘ NGƯỜI TẠO (CREATOR)</span>
                     </div>
                     <h1 class="text-2xl sm:text-3xl font-bold text-white">Thiết Kế Món Quà Sinh Nhật</h1>
-                    <p class="text-sm text-pink-100/75 mt-1">Tùy chỉnh lời chúc, nhạc nền, bức thư và mật khẩu. Mọi thay đổi được lưu đồng bộ để người nhận mở xem từ bất kỳ đâu.</p>
+                    <p class="text-sm text-pink-100/75 mt-1">Tùy chỉnh lời chúc, nhạc nền, bức thư và mật khẩu.</p>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
@@ -672,13 +538,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-semibold text-pink-200 mb-1.5">Mật khẩu Người xem (Gửi cho người nhận)</label>
-                        <input type="text" id="cfg-viewer-pass" class="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/20 focus:border-pink-400 outline-none text-white text-sm" placeholder="VD: sinhnhat">
-                        <p class="text-[11px] text-white/50 mt-1">Người nhận nhập mật khẩu này sẽ chỉ thấy bánh kem & thư chúc mừng.</p>
+                        <input type="text" id="cfg-viewer-pass" class="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/20 focus:border-pink-400 outline-none text-white text-sm" placeholder="VD: 21112026">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-pink-200 mb-1.5">Mật khẩu Người tạo (Dành riêng cho bạn)</label>
                         <input type="text" id="cfg-creator-pass" class="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/20 focus:border-amber-400 outline-none text-white text-sm" placeholder="VD: admin123">
-                        <p class="text-[11px] text-white/50 mt-1">Dùng mật khẩu này để quay lại trang chỉnh sửa bất cứ lúc nào.</p>
                     </div>
                 </div>
             </div>
@@ -692,11 +556,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-semibold text-pink-200 mb-1.5">Nhãn nhỏ phía trên (Tên người nhận)</label>
-                        <input type="text" id="cfg-recipient" class="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/20 focus:border-pink-400 outline-none text-white text-sm" placeholder="VD: Dành tặng Minh Anh ✨">
+                        <input type="text" id="cfg-recipient" class="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/20 focus:border-pink-400 outline-none text-white text-sm" placeholder="VD: Chúc mừng Dương đến với tuối 16 ✨">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-pink-200 mb-1.5">Tiêu đề chúc mừng lớn</label>
-                        <input type="text" id="cfg-main-title" class="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/20 focus:border-pink-400 outline-none text-white text-sm" placeholder="VD: Chúc Mừng Sinh Nhật Em Yêu!">
+                        <input type="text" id="cfg-main-title" class="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/20 focus:border-pink-400 outline-none text-white text-sm" placeholder="VD: Chúc Mừng Sinh Nhật!">
                     </div>
                 </div>
                 <div>
@@ -719,22 +583,22 @@
                 </div>
 
                 <p class="text-xs text-white/70">
-                    Khi người xem chạm thổi tắt nến, nhạc sẽ tự động phát. Bạn có thể tải file âm thanh từ máy (.mp3, .wav, .ogg dưới 750KB) hoặc dán link nhạc trực tiếp. Nếu để trống, hệ thống sẽ tự phát giai điệu <strong>Happy Birthday</strong> ấm áp!
+                    Tải file âm thanh (.mp3, .wav, .ogg dưới 750KB) hoặc dán link nhạc trực tiếp. Nếu để trống, hệ thống sẽ tự phát giai điệu <strong>Happy Birthday</strong>.
                 </p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                     <div class="p-4 rounded-2xl bg-black/25 border border-dashed border-white/25 space-y-2">
-                        <label class="block text-xs font-semibold text-sky-200">Tải file âm thanh từ máy tính/điện thoại</label>
+                        <label class="block text-xs font-semibold text-sky-200">Tải file âm thanh từ máy</label>
                         <input type="file" id="audio-file-input" accept="audio/*" onchange="handleAudioUpload(event)"
                             class="block w-full text-xs text-white/80 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-sky-500 file:text-white hover:file:bg-sky-600 cursor-pointer">
                         <div id="audio-file-status" class="text-[11px] text-emerald-300 hidden"></div>
                     </div>
 
                     <div class="space-y-2">
-                        <label class="block text-xs font-semibold text-sky-200">Hoặc dán đường link file nhạc (.mp3 URL)</label>
+                        <label class="block text-xs font-semibold text-sky-200">Hoặc dán link file nhạc (.mp3 URL)</label>
                         <input type="url" id="cfg-audio-url" oninput="clearUploadedAudioIfUrlTyped()" class="w-full px-4 py-2.5 rounded-xl bg-black/30 border border-white/20 focus:border-sky-400 outline-none text-white text-xs" placeholder="https://example.com/happy-birthday.mp3">
                         <button type="button" onclick="resetToDefaultSynthMusic()" class="text-[11px] text-rose-300 hover:underline cursor-pointer">
-                            <i class="fa-solid fa-rotate-left mr-1"></i>Dùng nhạc Happy Birthday mặc định của hệ thống
+                            <i class="fa-solid fa-rotate-left mr-1"></i>Dùng nhạc Happy Birthday mặc định
                         </button>
                     </div>
                 </div>
@@ -748,7 +612,7 @@
                             <i class="fa-solid fa-envelopes-bulk"></i>
                             <span>4. Lời Chúc Theo Từng Màu Bóng Bay</span>
                         </h2>
-                        <p class="text-xs text-white/65 mt-0.5">Mỗi màu bóng bay mang một lời chúc riêng. Khi người xem chạm vào bóng màu nào sẽ mở lời chúc của màu đó.</p>
+                        <p class="text-xs text-white/65 mt-0.5">Mỗi lời chúc tương ứng với một quả bóng bay xuất hiện khi thổi nến.</p>
                     </div>
                     <button type="button" onclick="addNewLetterCard()" class="px-4 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-lg transition cursor-pointer">
                         <i class="fa-solid fa-plus"></i>
@@ -772,80 +636,142 @@
         </div>
     </section>
 
-    <!-- ===================================================================== -->
-    <!-- SCRIPT: FIREBASE CLOUD STORAGE + FALLBACK LOCALSTORAGE              -->
-    <!-- ===================================================================== -->
+    <!-- SCRIPT LƯU TRỮ DỮ LIỆU (FIREBASE + LOCALSTORAGE) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const LOCAL_STORAGE_KEY = "birthday_wish_app_config_v1";
+        const LOCAL_STORAGE_KEY = "birthday_wish_app_config_v6";
 
         const DEFAULT_CONFIG = {
             creatorPassword: "admin123",
-            viewerPassword: "sinhnhat",
-            recipientLabel: "Dành tặng người đặc biệt ✨",
+            viewerPassword: "21112026",
+            recipientLabel: "Chúc mừng Dương đến với tuối 16 ✨",
             mainTitle: "Chúc Mừng Sinh Nhật!",
-            subMessage: "Chúc bạn một tuổi mới thật rực rỡ, bình an, luôn mỉm cười hạnh phúc và đạt được mọi ước mơ trong cuộc sống!",
+            subMessage: "Chúc Dương sang tuổi mới vẫn luôn vui vẻ hạnh phúc!",
             audioData: "",
             audioName: "",
             letters: [
                 {
                     id: "letter-1",
-                    title: "Lời chúc tuổi mới rực rỡ",
-                    sender: "Gửi bạn thân mến",
+                    title: "Con Trai",
+                    sender: "Đức",
                     color: "pink",
-                    content: "Chúc mừng sinh nhật! Mong rằng mỗi ngày trôi qua với bạn đều tràn ngập niềm vui, tiếng cười và những điều bất ngờ ngọt ngào nhất. Hãy luôn tự tin và tỏa sáng theo cách riêng của bạn nhé!",
+                    content: "Happy birthday Dân Đường nhá! Thêm tuổi mới trưởng thành hơn, ăn ngon ngủ kỹ, và luôn giữ niềm vui, hạnh phúc và luôn thành công trong con đường mà mình đã chọn",
                     image: ""
                 },
                 {
                     id: "letter-2",
-                    title: "Điều ước bình an & hạnh phúc",
-                    sender: "Từ một người luôn quý mến bạn",
-                    color: "amber",
-                    content: "Tuổi mới chúc bạn thật nhiều sức khỏe, công việc và học tập thuận lợi. Dù có bất kỳ thử thách nào phía trước, mong bạn luôn giữ được trái tim ấm áp và sự lạc quan như hiện tại!",
+                    title: "Ribu",
+                    sender: "Thư",
+                    color: "ruby",
+                    content: "🎊 🌷 Chúc mừng sinh nhật . 🌷 🎊 Sang tủi mới🥳 , chúc Dương luôn vui vẻ mỗi ngày 😊, thành công trên mỗi con đường😚 và hạnh phúc mỗt phút dây cuộc sống:3🤩 💖",
                     image: ""
                 },
                 {
                     id: "letter-3",
-                    title: "Tình yêu & sự ngọt ngào",
-                    sender: "Trái tim chân thành",
-                    color: "ruby",
-                    content: "Gửi đến bạn quả bóng màu đỏ rực rỡ nhất! Chúc bạn luôn được bao bọc bởi tình yêu thương, sự ấm áp và những cái ôm thật chặt trong suốt tuổi mới này!",
+                    title: "Sun",
+                    sender: "Sun",
+                    color: "amber",
+                    content: "”Chúc bạn có một ngày sinh nhật thật vui vẻ và nhận được thật nhiều quà. Bước sang tuổi mới, chúc bạn luôn tràn đầy may mắn, mọi mong muốn đều thành công rực rỡ và gặt hái được nhiều niềm vui mới nhé! 🎂 ✨”",
                     image: ""
                 },
                 {
                     id: "letter-4",
-                    title: "Ước mơ bay cao & tự do",
-                    sender: "Người bạn đồng hành",
+                    title: "Hoàng",
+                    sender: "Hoàng",
                     color: "sky",
-                    content: "Như bầu trời xanh rộng mở, chúc mọi dự định và hoài bão của bạn trong năm nay đều cất cánh bay cao và gặt hái thật nhiều thành công rực rỡ!",
+                    content: "Chúc Dương sinh nhật vui vẻ mắt bớt thâm",
                     image: ""
                 },
                 {
                     id: "letter-5",
-                    title: "Kỷ niệm diệu kỳ của chúng ta",
-                    sender: "Bí mật tuổi mới",
+                    title: "Sướng",
+                    sender: "Sướng",
                     color: "violet",
-                    content: "Cảm ơn bạn vì đã luôn mang lại nguồn năng lượng tuyệt vời. Mong rằng tuổi mới sẽ mang đến cho bạn thật nhiều phép màu và những chuyến đi đáng nhớ. Happy Birthday!",
+                    content: "Chúc mừng sinh nhật Dương chúc cậu luôn vui vẻ sống tích cực không lo âu chúc mừng sinh nhật Trần Thùy Dương",
+                    image: ""
+                },
+                {
+                    id: "letter-6",
+                    title: "Vân",
+                    sender: "Vân",
+                    color: "teal",
+                    content: "Duong duong to chúc duong thêm tuổi mới ngày nào cx cs mixue ăn mà khong bị đau họng😆",
+                    image: ""
+                },
+                {
+                    id: "letter-7",
+                    title: "T.Dương",
+                    sender: "Tùng Dương",
+                    color: "coral",
+                    content: "Chúc sinh nhật vui vẻ và không buồn.🎉 🎉 🎉",
+                    image: ""
+                },
+                {
+                    id: "letter-8",
+                    title: "Chi",
+                    sender: "Chi",
+                    color: "mint",
+                    content: "Chúc Thuỳ Dương thêm một tuổi, thêm hạnh phúc, thêm thành công và đặc biệt là có sức khoẻ để mixue còn ăn mixue tràn miệng!!!",
+                    image: ""
+                },
+                {
+                    id: "letter-9",
+                    title: "Bách Dương",
+                    sender: "Bách Dương",
+                    color: "pink",
+                    content: "Chúc Dương trúc cơ thành công",
+                    image: ""
+                },
+                {
+                    id: "letter-10",
+                    title: "Hà Linh",
+                    sender: "*Trâm viết thay",
+                    color: "ruby",
+                    content: "Chúc mừng sinh nhật cậu 🎂🎉 Tuổi mới chúc cậu luôn vui vẻ, mạnh khỏe, xinh xắn và gặp thật nhiều may mắn nhé. Mong rằng mọi điều cậu mong muốn đều sẽ dần trở thành hiện thực, những dự định đang ấp ủ đều thuận lợi và những ngày sắp tới sẽ có thật nhiều chuyện vui để nhớ. Chúc cậu học tập ngày càng tiến bộ, thi cử thật tốt, đạt được những mục tiêu mà cậu đặt ra và luôn có đủ tự tin để làm điều mình muốn.\n\nTuổi mới cũng mong cậu sẽ gặp được thật nhiều người tốt, có những tình bạn thật đẹp, luôn được yêu thương và trân trọng. Nếu có những lúc mệt mỏi hay không vui thì cũng đừng quên nghỉ ngơi, đừng tự tạo áp lực cho bản thân quá nhiều nhé. Mong cậu luôn giữ được nụ cười, sự vô tư và những điều đáng yêu của mình.\n\nHy vọng tuổi mới sẽ mở ra một hành trình thật đẹp với thật nhiều trải nghiệm mới, nhiều niềm vui, nhiều kỷ niệm đáng nhớ và ít muộn phiền hơn. Chúc cho mỗi ngày của cậu đều có ít nhất một lý do để vui, mỗi nỗ lực đều được đền đáp và mỗi ước mơ đều có cơ hội trở thành hiện thực.\n\nHappy Birthdayyy 🥳🎂✨ Chúc cậu tuổi mới thật rực rỡ, thật hạnh phúc và ngày càng trở thành phiên bản tốt hơn của chính mình. Quan trọng nhất là hãy luôn vui vẻ và sống theo cách mà cậu mong muốn nhé! 💗",
+                    image: ""
+                },
+                {
+                    id: "letter-11",
+                    title: "Trâm",
+                    sender: "Trâm",
+                    color: "amber",
+                    content: "Helllooooo (...) 👋😁😊😝😜👋🙋🤗🤗👐 Hôm nay đích thực là một ngày đẹp trời 🌧️☔🏳️‍🌈, cũng là một ngày quan trọng nè 📌, đúng hong?? 🤩😚💖💌 Hihi, đúng rùi :3, rõ ràng nay chính là ngày sinh nhật của một người đặc biệttttt!!!!! 🥳🌹🥰🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈 Và người đó chính là dương trần chim te 👊🧑‍🍼 Chúc bướm dương bước sang một tuổi mới nhaaaa 🥳🎉🎂🍰🎁🎊🎀🎈 Tôi hi vọng hôm nào của dương bướn cũng RựC rỡ như mặt trời ☔🌪️🌧️, và sẽ không có cơn mưa rào nào trong cuộc đời anh hết! 🌞✨ Happy Birthday (...) 🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈🥳🌹🎊💖👬💗🧑‍❤️‍🧑🧑‍🍼",
+                    image: ""
+                },
+                {
+                    id: "letter-12",
+                    title: "Đăng Dương",
+                    sender: "Đăng Dương",
+                    color: "sky",
+                    content: "Chúc bạn tuổi mới sức khỏe,  nhiều niềm vui, và hạnh phúc bên gia đình. Chúc bạn ngày càng xinh đẹp rạng rỡ, luôn đạt thành tích cao trong học tập.",
+                    image: ""
+                },
+                {
+                    id: "letter-13",
+                    title: "Khim",
+                    sender: "Khiêm",
+                    color: "violet",
+                    content: "Là người làm trang web này Khim chúc Dương sẽ luôn sống vui vẻ hạnh phúc tự chăm lo tốt cho bản thân 🫶 và sau này vẫn chơi game với Khim nhaaaaaaa",
                     image: ""
                 }
             ]
         };
 
+        const normalizeConfig = (data = {}) => ({
+            ...DEFAULT_CONFIG,
+            ...data,
+            letters: Array.isArray(data.letters) ? data.letters : DEFAULT_CONFIG.letters
+        });
+
         function loadLocalConfig() {
             try {
                 const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
-                if (!raw) return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
-                const parsed = JSON.parse(raw);
-                return {
-                    ...DEFAULT_CONFIG,
-                    ...parsed,
-                    letters: Array.isArray(parsed.letters) ? parsed.letters : DEFAULT_CONFIG.letters
-                };
-            } catch (e) {
-                return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+                return raw ? normalizeConfig(JSON.parse(raw)) : normalizeConfig();
+            } catch {
+                return normalizeConfig();
             }
         }
 
@@ -859,64 +785,41 @@
 
         window.appConfig = loadLocalConfig();
         let db = null;
-        let auth = null;
         let currentUser = null;
         let configDocRef = null;
 
         async function initFirebase() {
+            if (typeof __firebase_config === 'undefined') return;
             try {
-                if (typeof __firebase_config === 'undefined') {
-                    return;
-                }
-                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(JSON.parse(__firebase_config));
+                const auth = getAuth(app);
+                db = getFirestore(app);
                 const appId = typeof __app_id !== 'undefined' ? __app_id : 'birthday-wish-app';
 
-                const app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    const cred = await signInWithCustomToken(auth, __initial_auth_token);
-                    currentUser = cred.user;
-                } else {
-                    const cred = await signInAnonymously(auth);
-                    currentUser = cred.user;
-                }
-
+                const cred = (typeof __initial_auth_token !== 'undefined' && __initial_auth_token)
+                    ? await signInWithCustomToken(auth, __initial_auth_token)
+                    : await signInAnonymously(auth);
+                currentUser = cred.user;
                 if (!currentUser) return;
 
                 configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'birthday_settings', 'main_config');
-
                 const snap = await getDoc(configDocRef);
+
                 if (snap.exists()) {
-                    const data = snap.data();
-                    window.appConfig = {
-                        ...DEFAULT_CONFIG,
-                        ...data,
-                        letters: Array.isArray(data.letters) ? data.letters : DEFAULT_CONFIG.letters
-                    };
+                    window.appConfig = normalizeConfig(snap.data());
                     saveLocalConfig(window.appConfig);
                 } else {
                     await setDoc(configDocRef, window.appConfig);
                 }
 
                 onSnapshot(configDocRef, (docSnap) => {
-                    if (docSnap.exists()) {
-                        const updated = docSnap.data();
-                        window.appConfig = {
-                            ...DEFAULT_CONFIG,
-                            ...updated,
-                            letters: Array.isArray(updated.letters) ? updated.letters : DEFAULT_CONFIG.letters
-                        };
-                        saveLocalConfig(window.appConfig);
-                        if (!document.getElementById('view-viewer').classList.contains('hidden')) {
-                            window.renderViewerContent();
-                        }
+                    if (!docSnap.exists()) return;
+                    window.appConfig = normalizeConfig(docSnap.data());
+                    saveLocalConfig(window.appConfig);
+                    if (!document.getElementById('view-viewer').classList.contains('hidden')) {
+                        window.renderViewerContent();
                     }
-                }, (err) => {
-                    console.error("Lỗi đồng bộ dữ liệu:", err);
                 });
-
             } catch (error) {
                 console.error("Lỗi khởi tạo dịch vụ lưu trữ:", error);
             }
@@ -925,16 +828,14 @@
         window.persistConfigToCloud = async function(newConfig) {
             window.appConfig = newConfig;
             saveLocalConfig(newConfig);
+            if (!db || !currentUser || !configDocRef) return true;
 
-            if (!db || !currentUser || !configDocRef) {
-                return true;
-            }
             try {
                 await setDoc(configDocRef, newConfig);
                 return true;
             } catch (err) {
                 console.error("Lỗi khi lưu cấu hình:", err);
-                window.showToast("Không thể lưu lên đám mây (file có thể vượt giới hạn), nhưng đã lưu tạm trên trình duyệt này.", "error");
+                window.showToast("Không thể lưu lên đám mây, đã lưu tạm trên trình duyệt này.", "error");
                 return false;
             }
         };
@@ -942,9 +843,7 @@
         initFirebase();
     </script>
 
-    <!-- ===================================================================== -->
-    <!-- SCRIPT: GIAO DIỆN, BÁNH KEM, MIC THỔI NẾN, BÓNG BAY & ÂM THANH      -->
-    <!-- ===================================================================== -->
+    <!-- SCRIPT LOGIC CHÍNH -->
     <script>
         let candlesBlownOut = false;
         let isPlayingMusic = false;
@@ -961,76 +860,27 @@
         let isMicListening = false;
 
         const BALLOON_COLORS = {
-            pink: {
-                name: "Bóng Hồng Phấn",
-                light: "#f9a8d4",
-                dark: "#db2777",
-                hex: "#ec4899",
-                headerGrad: "from-pink-500 to-rose-500",
-                tagBg: "bg-pink-600/95 border-pink-200"
-            },
-            ruby: {
-                name: "Bóng Đỏ Ruby",
-                light: "#fda4af",
-                dark: "#be123c",
-                hex: "#e11d48",
-                headerGrad: "from-rose-600 to-red-600",
-                tagBg: "bg-rose-600/95 border-rose-200"
-            },
-            amber: {
-                name: "Bóng Vàng Nắng",
-                light: "#fde047",
-                dark: "#d97706",
-                hex: "#f59e0b",
-                headerGrad: "from-amber-500 to-orange-500",
-                tagBg: "bg-amber-600/95 border-amber-200"
-            },
-            sky: {
-                name: "Bóng Xanh Biển",
-                light: "#7dd3fc",
-                dark: "#0369a1",
-                hex: "#0ea5e9",
-                headerGrad: "from-sky-500 to-blue-600",
-                tagBg: "bg-sky-600/95 border-sky-200"
-            },
-            violet: {
-                name: "Bóng Tím Mộng Mơ",
-                light: "#d8b4fe",
-                dark: "#6b21a8",
-                hex: "#9333ea",
-                headerGrad: "from-violet-500 to-purple-600",
-                tagBg: "bg-violet-600/95 border-violet-200"
-            },
-            teal: {
-                name: "Bóng Xanh Ngọc",
-                light: "#5eead4",
-                dark: "#0f766e",
-                hex: "#14b8a6",
-                headerGrad: "from-teal-500 to-emerald-600",
-                tagBg: "bg-teal-600/95 border-teal-200"
-            },
-            coral: {
-                name: "Bóng Cam San Hô",
-                light: "#fdba74",
-                dark: "#c2410c",
-                hex: "#f97316",
-                headerGrad: "from-orange-500 to-red-500",
-                tagBg: "bg-orange-600/95 border-orange-200"
-            },
-            mint: {
-                name: "Bóng Xanh Lá Mint",
-                light: "#86efac",
-                dark: "#15803d",
-                hex: "#22c55e",
-                headerGrad: "from-emerald-500 to-green-600",
-                tagBg: "bg-emerald-600/95 border-emerald-200"
-            }
+            pink:   { name: "Bóng Hồng Phấn",   light: "#f9a8d4", dark: "#db2777", hex: "#ec4899", headerGrad: "from-pink-500 to-rose-500",    tagBg: "bg-pink-600/95 border-pink-200" },
+            ruby:   { name: "Bóng Đỏ Ruby",     light: "#fda4af", dark: "#be123c", hex: "#e11d48", headerGrad: "from-rose-600 to-red-600",     tagBg: "bg-rose-600/95 border-rose-200" },
+            amber:  { name: "Bóng Vàng Nắng",   light: "#fde047", dark: "#d97706", hex: "#f59e0b", headerGrad: "from-amber-500 to-orange-500", tagBg: "bg-amber-600/95 border-amber-200" },
+            sky:    { name: "Bóng Xanh Biển",   light: "#7dd3fc", dark: "#0369a1", hex: "#0ea5e9", headerGrad: "from-sky-500 to-blue-600",     tagBg: "bg-sky-600/95 border-sky-200" },
+            violet: { name: "Bóng Tím Mộng Mơ", light: "#d8b4fe", dark: "#6b21a8", hex: "#9333ea", headerGrad: "from-violet-500 to-purple-600",tagBg: "bg-violet-600/95 border-violet-200" },
+            teal:   { name: "Bóng Xanh Ngọc",   light: "#5eead4", dark: "#0f766e", hex: "#14b8a6", headerGrad: "from-teal-500 to-emerald-600", tagBg: "bg-teal-600/95 border-teal-200" },
+            coral:  { name: "Bóng Cam San Hô",  light: "#fdba74", dark: "#c2410c", hex: "#f97316", headerGrad: "from-orange-500 to-red-500",   tagBg: "bg-orange-600/95 border-orange-200" },
+            mint:   { name: "Bóng Xanh Lá Mint",light: "#86efac", dark: "#15803d", hex: "#22c55e", headerGrad: "from-emerald-500 to-green-600",tagBg: "bg-emerald-600/95 border-emerald-200" }
         };
 
         function getBalloonColorInfo(colorKey) {
             if (colorKey === 'rose') return BALLOON_COLORS.ruby;
             if (colorKey === 'emerald') return BALLOON_COLORS.mint;
             return BALLOON_COLORS[colorKey] || BALLOON_COLORS.pink;
+        }
+
+        function getAudioContext() {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (!audioCtx && AudioContextClass) audioCtx = new AudioContextClass();
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+            return audioCtx;
         }
 
         function createStarfield() {
@@ -1042,12 +892,7 @@
                 const star = document.createElement('div');
                 star.className = 'star';
                 const size = Math.random() * 2.5 + 1;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
-                star.style.animationDelay = `${Math.random() * 3}s`;
+                star.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--duration:${Math.random()*3+2}s;animation-delay:${Math.random()*3}s;`;
                 container.appendChild(star);
             }
         }
@@ -1056,26 +901,17 @@
             const container = document.getElementById('toast-container');
             if (!container) return;
             const toast = document.createElement('div');
-
-            const colors = {
-                success: 'bg-emerald-600/95 border-emerald-400 text-white',
-                error: 'bg-rose-600/95 border-rose-400 text-white',
-                info: 'bg-slate-800/95 border-pink-400/50 text-pink-100'
+            const styles = {
+                success: ['bg-emerald-600/95 border-emerald-400 text-white', 'fa-circle-check'],
+                error:   ['bg-rose-600/95 border-rose-400 text-white', 'fa-triangle-exclamation'],
+                info:    ['bg-slate-800/95 border-pink-400/50 text-pink-100', 'fa-sparkles']
             };
+            const [cls, icon] = styles[type] || styles.info;
 
-            const icons = {
-                success: 'fa-circle-check',
-                error: 'fa-triangle-exclamation',
-                info: 'fa-sparkles'
-            };
-
-            toast.className = `pointer-events-auto px-4 py-3 rounded-2xl border backdrop-blur-md shadow-2xl flex items-center gap-3 text-sm font-medium transition-all duration-300 transform translate-y-0 opacity-100 ${colors[type] || colors.info}`;
-            toast.innerHTML = `
-                <i class="fa-solid ${icons[type] || icons.info} text-base"></i>
-                <span class="flex-1">${message}</span>
-            `;
-
+            toast.className = `pointer-events-auto px-4 py-3 rounded-2xl border backdrop-blur-md shadow-2xl flex items-center gap-3 text-sm font-medium transition-all duration-300 ${cls}`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-base"></i><span class="flex-1">${message}</span>`;
             container.appendChild(toast);
+
             setTimeout(() => {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateY(-12px)';
@@ -1087,71 +923,51 @@
             const input = document.getElementById(inputId);
             const icon = document.getElementById(iconId);
             if (!input || !icon) return;
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.replace('fa-eye', 'fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.replace('fa-eye-slash', 'fa-eye');
-            }
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            icon.classList.replace(isHidden ? 'fa-eye' : 'fa-eye-slash', isHidden ? 'fa-eye-slash' : 'fa-eye');
         }
 
-        function toggleHint() {
-            document.getElementById('password-hint-box').classList.toggle('hidden');
+        function setVisible(id, show, displayClass = 'block') {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.classList.toggle('hidden', !show);
+            if (displayClass !== 'block') el.classList.toggle(displayClass, show);
         }
 
         function switchView(viewName) {
-            document.getElementById('view-login').classList.add('hidden');
-            document.getElementById('view-viewer').classList.add('hidden');
-            document.getElementById('view-creator').classList.add('hidden');
-
-            const btnLogout = document.getElementById('btn-logout');
-            const btnMusic = document.getElementById('btn-toggle-music');
-            const btnMic = document.getElementById('btn-toggle-mic');
-            const syncBadge = document.getElementById('sync-badge');
-
+            ['view-login', 'view-viewer', 'view-creator'].forEach(id => setVisible(id, false));
             stopAllAudio();
             stopMicBlowDetection();
             clearBalloons();
+            document.body.classList.remove('bg-celebration');
+
+            const isViewer = viewName === 'viewer';
+            const isCreator = viewName === 'creator';
+
+            setVisible('btn-logout', isViewer || isCreator, 'inline-flex');
+            setVisible('btn-toggle-music', isViewer, 'inline-flex');
+            setVisible('btn-toggle-mic', isViewer, 'inline-flex');
+            setVisible('sync-badge', isViewer || isCreator);
 
             if (viewName === 'login') {
-                document.getElementById('view-login').classList.remove('hidden');
+                setVisible('view-login', true);
                 document.getElementById('password-input').value = '';
-                btnLogout.classList.add('hidden');
-                btnMusic.classList.add('hidden');
-                btnMic.classList.add('hidden');
-                syncBadge.classList.add('hidden');
-                document.body.classList.remove('bg-celebration');
-            } else if (viewName === 'viewer') {
-                document.getElementById('view-viewer').classList.remove('hidden');
-                btnLogout.classList.remove('hidden');
-                btnLogout.classList.add('inline-flex');
-                btnMusic.classList.remove('hidden');
-                btnMusic.classList.add('inline-flex');
-                btnMic.classList.remove('hidden');
-                btnMic.classList.add('inline-flex');
-                syncBadge.classList.remove('hidden');
+            } else if (isViewer) {
+                setVisible('view-viewer', true);
                 relightCandles(true);
                 renderViewerContent();
-            } else if (viewName === 'creator') {
-                document.getElementById('view-creator').classList.remove('hidden');
-                btnLogout.classList.remove('hidden');
-                btnLogout.classList.add('inline-flex');
-                btnMusic.classList.add('hidden');
-                btnMic.classList.add('hidden');
-                syncBadge.classList.remove('hidden');
-                document.body.classList.remove('bg-celebration');
+            } else if (isCreator) {
+                setVisible('view-creator', true);
                 populateCreatorForm();
             }
         }
 
         function handleLogin(e) {
             e.preventDefault();
-            const entered = document.getElementById('password-input').value.trim();
-            if (!entered) {
-                showToast("Vui lòng nhập mật khẩu để tiếp tục!", "error");
-                return;
-            }
+            const input = document.getElementById('password-input');
+            const entered = input.value.trim();
+            if (!entered) return showToast("Vui lòng nhập mật khẩu để tiếp tục!", "error");
 
             const cfg = window.appConfig || {};
             if (entered === cfg.creatorPassword) {
@@ -1162,7 +978,6 @@
                 switchView('viewer');
             } else {
                 showToast("Mật khẩu chưa chính xác, hãy thử lại nhé!", "error");
-                const input = document.getElementById('password-input');
                 input.classList.add('border-rose-500');
                 setTimeout(() => input.classList.remove('border-rose-500'), 1000);
             }
@@ -1171,28 +986,20 @@
         async function toggleMicBlowDetection() {
             if (isMicListening) {
                 stopMicBlowDetection();
-                showToast("Đã tắt chế độ thổi nến qua micro.", "info");
-                return;
+                return showToast("Đã tắt chế độ thổi nến qua micro.", "info");
             }
-
             if (candlesBlownOut) {
-                showToast("Nến đã tắt rồi! Hãy bấm 'Thắp lại nến' nếu muốn thổi tiếp.", "info");
-                return;
+                return showToast("Nến đã tắt rồi! Hãy bấm 'Thắp lại nến' nếu muốn thổi tiếp.", "info");
             }
 
             try {
-                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                    showToast("Trình duyệt này không hỗ trợ micro. Bạn vẫn có thể chạm vào bánh kem để thổi nến!", "error");
-                    return;
+                if (!navigator.mediaDevices?.getUserMedia) {
+                    return showToast("Trình duyệt không hỗ trợ micro. Bạn có thể chạm vào bánh kem để thổi nến!", "error");
                 }
-
-                micStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                if (!audioCtx) audioCtx = new AudioContextClass();
-                if (audioCtx.state === 'suspended') await audioCtx.resume();
-
-                const source = audioCtx.createMediaStreamSource(micStream);
-                micAnalyser = audioCtx.createAnalyser();
+                micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const ctx = getAudioContext();
+                const source = ctx.createMediaStreamSource(micStream);
+                micAnalyser = ctx.createAnalyser();
                 micAnalyser.fftSize = 256;
                 source.connect(micAnalyser);
 
@@ -1206,45 +1013,29 @@
                 const monitorBlow = () => {
                     if (!isMicListening || candlesBlownOut || !micAnalyser) return;
                     micAnalyser.getByteFrequencyData(dataArray);
-
-                    let sum = 0;
-                    for (let i = 0; i < dataArray.length; i++) {
-                        sum += dataArray[i];
-                    }
-                    const avgVolume = sum / dataArray.length;
+                    const avgVolume = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
 
                     if (avgVolume > 62) {
-                        highBlowFrames++;
-                        if (highBlowFrames >= 4) {
+                        if (++highBlowFrames >= 4) {
                             stopMicBlowDetection();
-                            blowOutCandles();
-                            return;
+                            return blowOutCandles();
                         }
                     } else {
                         highBlowFrames = Math.max(0, highBlowFrames - 1);
                     }
-
                     micRafId = requestAnimationFrame(monitorBlow);
                 };
-
                 micRafId = requestAnimationFrame(monitorBlow);
-            } catch (err) {
-                console.warn("Không bật được micro:", err);
+            } catch {
                 showToast("Chưa cấp quyền micro. Bạn có thể chạm trực tiếp vào nến hoặc bánh kem!", "info");
             }
         }
 
         function stopMicBlowDetection() {
             isMicListening = false;
-            if (micRafId) {
-                cancelAnimationFrame(micRafId);
-                micRafId = null;
-            }
-            if (micStream) {
-                micStream.getTracks().forEach(t => t.stop());
-                micStream = null;
-            }
-            micAnalyser = null;
+            if (micRafId) cancelAnimationFrame(micRafId);
+            if (micStream) micStream.getTracks().forEach(t => t.stop());
+            micRafId = micStream = micAnalyser = null;
             updateMicButtonUI();
         }
 
@@ -1252,21 +1043,17 @@
             const icon = document.getElementById('mic-icon');
             const label = document.getElementById('mic-label');
             if (!icon) return;
-            if (isMicListening) {
-                icon.className = 'fa-solid fa-microphone text-emerald-300 animate-pulse';
-                if (label) label.textContent = 'Đang nghe thổi...';
-            } else {
-                icon.className = 'fa-solid fa-microphone-slash text-amber-200';
-                if (label) label.textContent = 'Thổi bằng mic';
-            }
+            icon.className = isMicListening
+                ? 'fa-solid fa-microphone text-emerald-300 animate-pulse'
+                : 'fa-solid fa-microphone-slash text-amber-200';
+            if (label) label.textContent = isMicListening ? 'Đang nghe thổi...' : 'Thổi bằng mic';
         }
 
         window.renderViewerContent = function() {
             const cfg = window.appConfig || {};
-            document.getElementById('recipient-badge').textContent = cfg.recipientLabel || "Dành tặng người đặc biệt ✨";
+            document.getElementById('recipient-badge').textContent = cfg.recipientLabel || "Chúc mừng Dương đến với tuối 16 ✨";
             document.getElementById('viewer-main-title').textContent = cfg.mainTitle || "Chúc Mừng Sinh Nhật!";
-            document.getElementById('viewer-sub-message').textContent = cfg.subMessage || "";
-
+            document.getElementById('viewer-sub-message').textContent = cfg.subMessage || "Chúc Dương sang tuổi mới vẫn luôn vui vẻ hạnh phúc!";
             const badge = document.getElementById('letter-count-badge');
             if (badge) badge.textContent = (cfg.letters || []).length;
         };
@@ -1276,99 +1063,59 @@
             candlesBlownOut = true;
             stopMicBlowDetection();
 
-            const flames = document.querySelectorAll('[data-flame]');
-            flames.forEach(flame => {
+            document.querySelectorAll('[data-flame]').forEach(flame => {
                 flame.style.opacity = '0';
                 flame.style.transform = 'translateX(-50%) scale(0.1)';
-                const parent = flame.parentElement;
                 const smoke = document.createElement('div');
                 smoke.className = 'candle-smoke';
-                parent.appendChild(smoke);
+                flame.parentElement.appendChild(smoke);
                 setTimeout(() => smoke.remove(), 2300);
             });
 
-            const aura = document.getElementById('cake-aura');
-            if (aura) aura.style.opacity = '0';
+            document.getElementById('cake-aura').style.opacity = '0';
             document.body.classList.add('bg-celebration');
 
             const instruction = document.getElementById('candle-instruction');
-            if (instruction) {
-                instruction.classList.remove('animate-pulse');
-                instruction.innerHTML = `<i class="fa-solid fa-sparkles text-amber-300"></i> <span>Chạm vào từng màu bóng bay đang bay khắp màn hình để mở lời chúc bí mật!</span>`;
-            }
+            instruction.classList.remove('animate-pulse');
+            instruction.innerHTML = `<i class="fa-solid fa-sparkles text-amber-300"></i> <span>Chạm vào từng bóng bay để mở lời chúc bí mật!</span>`;
 
-            const postControls = document.getElementById('viewer-post-controls');
-            if (postControls) {
-                postControls.classList.remove('hidden');
-                postControls.classList.add('flex');
-            }
-
+            setVisible('viewer-post-controls', true, 'flex');
             launchAllWishBalloons();
 
             if (balloonInterval) clearInterval(balloonInterval);
             balloonInterval = setInterval(() => {
                 if (candlesBlownOut && !document.getElementById('view-viewer').classList.contains('hidden')) {
-                    ensureAllWishColorsFloating();
+                    launchAllWishBalloons(true);
                 }
             }, 3800);
 
-            try {
-                triggerCelebrationConfetti();
-            } catch (e) {
-                console.warn("Lỗi hiệu ứng confetti:", e);
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 90, spread: 75, origin: { y: 0.6 } });
+                setTimeout(() => confetti({ particleCount: 55, angle: 120, spread: 55, origin: { x: 1 } }), 350);
             }
-
-            try {
-                startCelebrationMusic();
-            } catch (e) {
-                console.warn("Lỗi phát nhạc tự động:", e);
-            }
+            startCelebrationMusic();
         }
 
         function relightCandles(silent = false) {
             candlesBlownOut = false;
-            const flames = document.querySelectorAll('[data-flame]');
-            flames.forEach(flame => {
+            document.querySelectorAll('[data-flame]').forEach(flame => {
                 flame.style.opacity = '1';
                 flame.style.visibility = 'visible';
-                flame.style.animation = '';
                 flame.style.transform = 'translateX(-50%) scale(1)';
             });
 
-            const aura = document.getElementById('cake-aura');
-            if (aura) aura.style.opacity = '1';
+            document.getElementById('cake-aura').style.opacity = '1';
             document.body.classList.remove('bg-celebration');
-
-            const postControls = document.getElementById('viewer-post-controls');
-            if (postControls) postControls.classList.add('hidden');
+            setVisible('viewer-post-controls', false);
 
             const instruction = document.getElementById('candle-instruction');
-            if (instruction) {
-                instruction.classList.add('animate-pulse');
-                instruction.innerHTML = `<i class="fa-solid fa-fire text-amber-400"></i> <span>Chạm vào bánh kem hoặc bấm vào đây để thổi nến!</span>`;
-            }
+            instruction.classList.add('animate-pulse');
+            instruction.innerHTML = `<i class="fa-solid fa-fire text-amber-400"></i> <span>Chạm vào bánh kem hoặc bấm vào đây để thổi nến!</span>`;
 
             if (!silent) {
                 stopAllAudio();
                 clearBalloons();
             }
-        }
-
-        function triggerCelebrationConfetti() {
-            if (typeof confetti !== 'function') return;
-            confetti({
-                particleCount: 90,
-                spread: 75,
-                origin: { y: 0.6 }
-            });
-            setTimeout(() => {
-                confetti({
-                    particleCount: 55,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 }
-                });
-            }, 350);
         }
 
         function createBalloonSVG(cLight, cDark, width, height, gradId) {
@@ -1389,81 +1136,47 @@
             `;
         }
 
-        // Tạo các nhóm tốc độ: mỗi nhóm có 3–6 bóng, cùng nhịp bay gần nhau.
-        // Trong từng nhóm vẫn có sai khác nhỏ để mỗi quả bóng có tốc độ riêng.
         function createBalloonSpeedPlan(count) {
-            const groupSizes = [];
-            let remaining = Math.max(0, Number(count) || 0);
-            while (remaining > 0) {
-                // Ưu tiên nhóm 3–6 quả; với tổng số ít (1–2) vẫn tạo nhóm hợp lệ.
-                if (remaining <= 6) {
-                    groupSizes.push(remaining);
-                    remaining = 0;
-                    break;
-                }
-                const possible = [3, 4, 5, 6].filter(size => size <= remaining && (remaining - size === 0 || remaining - size >= 3));
-                const size = possible.length
-                    ? possible[Math.floor(Math.random() * possible.length)]
-                    : Math.min(6, remaining);
-                groupSizes.push(size);
-                remaining -= size;
-            }
             const durations = [];
-            groupSizes.forEach(size => {
+            let remaining = Math.max(0, count);
+            while (remaining > 0) {
+                const size = remaining <= 6 ? remaining : (Math.floor(Math.random() * 4) + 3);
+                const actualSize = Math.min(size, remaining);
                 const groupBase = 14500 + Math.random() * 7500;
-                for (let i = 0; i < size; i++) durations.push(Math.round(groupBase * (0.94 + Math.random() * 0.12)));
-            });
-            for (let i = durations.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [durations[i], durations[j]] = [durations[j], durations[i]];
+                for (let i = 0; i < actualSize; i++) {
+                    durations.push(Math.round(groupBase * (0.94 + Math.random() * 0.12)));
+                }
+                remaining -= actualSize;
             }
-            return durations;
+            return durations.sort(() => Math.random() - 0.5);
         }
 
-        function animateBalloonFullScreen(el, options = {}) {
+        function animateBalloonFullScreen(el, startX, riseDuration) {
             const vw = window.innerWidth;
             const vh = window.innerHeight;
             const safeMaxX = Math.max(12, vw - 125);
-            const baseX = Math.max(12, Math.min(safeMaxX, options.startX ?? Math.random() * safeMaxX));
-            const swayAmp = options.swayAmp || (34 + Math.random() * 48);
-            const bottomY = vh + 190;
-            const topY = -300;
-            // Đường bay uốn lượn nhẹ, mỗi quả có biên độ và hướng trôi riêng.
-            const direction = Math.random() < 0.5 ? -1 : 1;
-            const x1 = Math.max(8, Math.min(safeMaxX, baseX + direction * swayAmp));
-            const x2 = Math.max(8, Math.min(safeMaxX, baseX - direction * swayAmp * 0.72));
-            const x3 = Math.max(8, Math.min(safeMaxX, baseX + direction * swayAmp * 0.48));
-            const x4 = Math.max(8, Math.min(safeMaxX, baseX - direction * swayAmp * 0.3));
-            const duration = options.riseDuration || (14500 + Math.random() * 6500);
+            const baseX = Math.max(12, Math.min(safeMaxX, startX));
+            const swayAmp = 24 + Math.random() * 38;
+            const dir = Math.random() < 0.5 ? -1 : 1;
+            const clampX = x => Math.max(8, Math.min(safeMaxX, x));
             const tilt = () => (Math.random() * 10 - 5).toFixed(1);
 
-            if (typeof el.animate !== 'function') {
-                el.style.transform = `translate3d(${baseX}px, ${bottomY}px, 0)`;
-                return;
-            }
+            if (typeof el.animate !== 'function') return;
 
             const anim = el.animate([
-                { offset: 0, opacity: 0, transform: `translate3d(${baseX}px, ${bottomY}px, 0) rotate(${tilt()}deg) scale(.82)` },
+                { offset: 0,    opacity: 0, transform: `translate3d(${baseX}px, ${vh + 190}px, 0) rotate(${tilt()}deg) scale(.82)` },
                 { offset: 0.08, opacity: 1, transform: `translate3d(${baseX}px, ${vh * 0.88}px, 0) rotate(${tilt()}deg) scale(1)` },
-                { offset: 0.27, opacity: 1, transform: `translate3d(${x1}px, ${vh * 0.68}px, 0) rotate(${tilt()}deg) scale(1.025)` },
-                { offset: 0.5, opacity: 1, transform: `translate3d(${x2}px, ${vh * 0.45}px, 0) rotate(${tilt()}deg) scale(.98)` },
-                { offset: 0.73, opacity: 1, transform: `translate3d(${x3}px, ${vh * 0.22}px, 0) rotate(${tilt()}deg) scale(1.02)` },
-                { offset: 0.9, opacity: 1, transform: `translate3d(${x4}px, ${vh * 0.06}px, 0) rotate(${tilt()}deg) scale(1)` },
-                { offset: 1, opacity: 0, transform: `translate3d(${baseX + direction * 18}px, ${topY}px, 0) rotate(${tilt()}deg) scale(.9)` }
+                { offset: 0.27, opacity: 1, transform: `translate3d(${clampX(baseX + dir * swayAmp)}px, ${vh * 0.68}px, 0) rotate(${tilt()}deg) scale(1.025)` },
+                { offset: 0.5,  opacity: 1, transform: `translate3d(${clampX(baseX - dir * swayAmp * 0.72)}px, ${vh * 0.45}px, 0) rotate(${tilt()}deg) scale(.98)` },
+                { offset: 0.73, opacity: 1, transform: `translate3d(${clampX(baseX + dir * swayAmp * 0.48)}px, ${vh * 0.22}px, 0) rotate(${tilt()}deg) scale(1.02)` },
+                { offset: 0.9,  opacity: 1, transform: `translate3d(${clampX(baseX - dir * swayAmp * 0.3)}px, ${vh * 0.06}px, 0) rotate(${tilt()}deg) scale(1)` },
+                { offset: 1,    opacity: 0, transform: `translate3d(${baseX + dir * 18}px, -300px, 0) rotate(${tilt()}deg) scale(.9)` }
             ], {
-                duration,
+                duration: riseDuration,
                 easing: 'cubic-bezier(.42, 0, .58, 1)',
-                iterations: Infinity,
-                delay: 0
+                iterations: Infinity
             });
             activeBalloonAnimations.push(anim);
-        }
-
-        // Chỉ hiển thị bóng bay có gắn lời chúc; không tạo bóng trang trí trống.
-        // Giữ tên hàm để các nút hiện có vẫn hoạt động mà không ảnh hưởng chức năng khác.
-        function spawnDecorativeBalloons(count = 14) {
-            if (!candlesBlownOut || document.getElementById('view-viewer').classList.contains('hidden')) return;
-            ensureAllWishColorsFloating();
         }
 
         function popBalloonWithConfetti(el, hexColor, clientX, clientY) {
@@ -1472,8 +1185,8 @@
             playPopSound();
 
             const rect = el.getBoundingClientRect();
-            const originX = (clientX || (rect.left + rect.width / 2)) / window.innerWidth;
-            const originY = (clientY || (rect.top + rect.height * 0.35)) / window.innerHeight;
+            const originX = (clientX || rect.left + rect.width / 2) / window.innerWidth;
+            const originY = (clientY || rect.top + rect.height * 0.35) / window.innerHeight;
 
             if (typeof confetti === 'function') {
                 confetti({
@@ -1484,87 +1197,39 @@
                     origin: { x: Math.max(0.05, Math.min(0.95, originX)), y: Math.max(0.05, Math.min(0.95, originY)) }
                 });
             }
-
-            setTimeout(() => {
-                if (el.parentNode) el.remove();
-            }, 190);
+            setTimeout(() => el.remove(), 190);
         }
 
         function clearBalloons() {
-            if (balloonInterval) {
-                clearInterval(balloonInterval);
-                balloonInterval = null;
-            }
-            activeBalloonAnimations.forEach(anim => {
-                try { anim.cancel(); } catch (e) {}
-            });
+            if (balloonInterval) clearInterval(balloonInterval);
+            balloonInterval = null;
+            activeBalloonAnimations.forEach(anim => { try { anim.cancel(); } catch {} });
             activeBalloonAnimations = [];
             const layer = document.getElementById('balloonLayer');
             if (layer) layer.innerHTML = '';
         }
 
-        function computeSkySpotForWishBalloon(index, total) {
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
-            const isMobile = vw < 640;
-            const balloonW = isMobile ? 96 : 118;
-
-            const cols = Math.min(Math.max(total, 1), isMobile ? 3 : 5);
-            const col = index % cols;
-            const row = Math.floor(index / cols);
-
-            const minX = vw * 0.05;
-            const maxX = Math.max(minX + 40, vw * 0.92 - balloonW);
-            const stepX = cols === 1 ? 0 : (maxX - minX) / (cols - 1);
-            const jitterX = ((index * 29) % 36) - 18;
-            const targetX = cols === 1
-                ? (vw - balloonW) / 2
-                : Math.max(minX, Math.min(maxX, minX + col * stepX + jitterX));
-
-            const minY = Math.max(64, vh * 0.09);
-            const maxY = Math.max(minY + 60, vh * 0.68);
-            const rowOffset = row * (isMobile ? 115 : 135);
-            const waveOffset = (index % 2 === 0 ? 0 : (isMobile ? 48 : 65));
-            const targetY = Math.max(minY, Math.min(maxY, minY + rowOffset + waveOffset));
-
-            return { targetX, targetY };
-        }
-
-        function spawnSingleWishBalloon(index, delayMs = 0, letterIndex = index, riseDuration = null) {
-            const letters = (window.appConfig && window.appConfig.letters) || [];
-            if (!letters.length) return;
-            // Mỗi bóng đều gắn với một lời chúc thật; nhiều bóng có thể mở cùng một lời chúc.
-            const safeLetterIndex = ((letterIndex % letters.length) + letters.length) % letters.length;
-            const letter = letters[safeLetterIndex];
-            if (!letter) return;
-
+        function spawnSingleWishBalloon(index, delayMs = 0, riseDuration = null) {
+            const letters = window.appConfig?.letters || [];
+            const letter = letters[index];
             const layer = document.getElementById('balloonLayer');
-            if (!layer) return;
+            if (!letter || !layer) return;
 
-            const existing = document.getElementById(`wish-balloon-${index}`);
-            if (existing) existing.remove();
+            document.getElementById(`wish-balloon-${index}`)?.remove();
 
             setTimeout(() => {
                 if (!candlesBlownOut || document.getElementById('view-viewer').classList.contains('hidden')) return;
 
-                // Luân phiên bảng màu để 15–20 quả bóng có nhiều màu khác nhau,
-                // nhưng khi chạm vẫn mở đúng lời chúc được gán cho quả bóng đó.
-                const colorKeys = Object.keys(BALLOON_COLORS);
-                const preferredColor = colorKeys[index % colorKeys.length];
-                const cInfo = getBalloonColorInfo(preferredColor);
+                const cInfo = getBalloonColorInfo(letter.color);
                 const vw = window.innerWidth;
-                const isMobile = vw < 640;
-                const bSize = isMobile ? 66 : 78;
-                const spot = computeSkySpotForWishBalloon(index, letters.length);
-                // Vị trí ngang ngẫu nhiên, không xếp theo cột/hàng.
-                const startX = Math.max(10, Math.min(vw - bSize - 20, Math.random() * Math.max(1, vw - bSize - 20)));
+                const bSize = vw < 640 ? 66 : 78;
+                const startX = Math.max(10, Math.random() * Math.max(1, vw - bSize - 20));
                 const gradId = `wishBalloonGrad_${index}_${Date.now()}`;
 
                 const wrapper = document.createElement('div');
                 wrapper.id = `wish-balloon-${index}`;
-                wrapper.className = 'sky-balloon wish-balloon';
+                wrapper.className = 'sky-balloon';
                 wrapper.title = `${cInfo.name}: Chạm để mở "${letter.title || 'Lời chúc'}"`;
-
                 wrapper.innerHTML = `
                     <div class="sky-balloon-visual">
                         ${createBalloonSVG(cInfo.light, cInfo.dark, bSize, Math.round(bSize * 1.35), gradId)}
@@ -1583,110 +1248,46 @@
                 wrapper.onclick = (e) => {
                     e.stopPropagation();
                     popBalloonWithConfetti(wrapper, cInfo.hex, e.clientX, e.clientY);
-                    setTimeout(() => {
-                        openLetterModal(safeLetterIndex);
-                    }, 170);
+                    setTimeout(() => openLetterModal(index), 170);
                 };
 
                 layer.appendChild(wrapper);
-
-                animateBalloonFullScreen(wrapper, {
-                    startX,
-                    targetX: startX + (Math.random() * 120 - 60),
-                    targetY: spot.targetY,
-                    swayAmp: 24 + Math.random() * 38,
-                    // Tốc độ và pha khác nhau giúp bóng bay rải rác, không theo hàng.
-                    riseDuration: riseDuration || (14500 + Math.random() * 8000),
-                    continuousPass: true
-                });
+                animateBalloonFullScreen(wrapper, startX, riseDuration || (14500 + Math.random() * 8000));
             }, delayMs);
         }
 
-        function launchAllWishBalloons() {
-            const letters = (window.appConfig && Array.isArray(window.appConfig.letters)) ? window.appConfig.letters : [];
-            const balloonCount = letters.length;
+        function launchAllWishBalloons(onlyMissing = false) {
+            const letters = window.appConfig?.letters || [];
             const badge = document.getElementById('letter-count-badge');
-            if (badge) badge.textContent = balloonCount;
+            if (badge) badge.textContent = letters.length;
 
-            if (balloonCount === 0) {
-                showToast("Chưa có lời chúc nào được tạo trong phần Creator!", "info");
+            if (!letters.length) {
+                if (!onlyMissing) showToast("Chưa có lời chúc nào được tạo trong phần Creator!", "info");
                 return;
             }
 
-            // Mỗi lời chúc trong Creator tương ứng chính xác một bóng bay.
-            // Xóa các bóng có chỉ số cũ nếu số lời chúc đã giảm.
             const layer = document.getElementById('balloonLayer');
-            if (layer) {
-                layer.querySelectorAll('.wish-balloon').forEach(balloon => {
-                    const match = balloon.id.match(/^wish-balloon-(\d+)$/);
-                    if (match && Number(match[1]) >= balloonCount) balloon.remove();
-                });
-            }
+            layer?.querySelectorAll('.sky-balloon').forEach(b => {
+                const idx = Number(b.id.replace('wish-balloon-', ''));
+                if (idx >= letters.length) b.remove();
+            });
 
-            const speedPlan = createBalloonSpeedPlan(balloonCount);
-            for (let balloonIndex = 0; balloonIndex < balloonCount; balloonIndex++) {
-                spawnSingleWishBalloon(balloonIndex, Math.random() * 1800, balloonIndex, speedPlan[balloonIndex]);
-            }
-        }
-
-        function ensureAllWishColorsFloating() {
-            const letters = (window.appConfig && Array.isArray(window.appConfig.letters)) ? window.appConfig.letters : [];
-            const balloonCount = letters.length;
-            if (!balloonCount) return;
-
-            const layer = document.getElementById('balloonLayer');
-            if (layer) {
-                layer.querySelectorAll('.wish-balloon').forEach(balloon => {
-                    const match = balloon.id.match(/^wish-balloon-(\d+)$/);
-                    if (match && Number(match[1]) >= balloonCount) balloon.remove();
-                });
-            }
-
-            const speedPlan = createBalloonSpeedPlan(balloonCount);
-            for (let balloonIndex = 0; balloonIndex < balloonCount; balloonIndex++) {
-                if (!document.getElementById(`wish-balloon-${balloonIndex}`) && currentlyOpenedLetterIndex !== balloonIndex) {
-                    spawnSingleWishBalloon(balloonIndex, Math.random() * 900, balloonIndex, speedPlan[balloonIndex]);
+            const speedPlan = createBalloonSpeedPlan(letters.length);
+            letters.forEach((_, idx) => {
+                const exists = document.getElementById(`wish-balloon-${idx}`);
+                if (!onlyMissing || (!exists && currentlyOpenedLetterIndex !== idx)) {
+                    spawnSingleWishBalloon(idx, Math.random() * (onlyMissing ? 900 : 1800), speedPlan[idx]);
                 }
-            }
-        }
-
-        function startCelebrationMusic() {
-            stopAllAudio();
-            const audioSource = (window.appConfig && window.appConfig.audioData) ? window.appConfig.audioData.trim() : '';
-            if (audioSource) {
-                try {
-                    customAudioPlayer = new Audio(audioSource);
-                    customAudioPlayer.loop = true;
-                    const playPromise = customAudioPlayer.play();
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            isPlayingMusic = true;
-                            updateMusicButtonUI();
-                        }).catch(() => {
-                            playHappyBirthdaySynth();
-                        });
-                    } else {
-                        isPlayingMusic = true;
-                        updateMusicButtonUI();
-                    }
-                    return;
-                } catch (err) {
-                    console.warn("Chuyển sang nhạc mặc định:", err);
-                }
-            }
-            playHappyBirthdaySynth();
+            });
         }
 
         function openLetterModal(index) {
-            const letters = (window.appConfig && window.appConfig.letters) || [];
-            const letter = letters[index];
+            const letter = (window.appConfig?.letters || [])[index];
             if (!letter) return;
             currentlyOpenedLetterIndex = index;
 
             const cInfo = getBalloonColorInfo(letter.color);
-            const headerEl = document.getElementById('modal-letter-header');
-            headerEl.className = `bg-gradient-to-r ${cInfo.headerGrad} px-6 py-5 text-white transition-colors duration-300`;
-
+            document.getElementById('modal-letter-header').className = `bg-gradient-to-r ${cInfo.headerGrad} px-6 py-5 text-white transition-colors duration-300`;
             document.getElementById('modal-balloon-dot').style.backgroundColor = cInfo.light;
             document.getElementById('modal-balloon-color-name').textContent = cInfo.name;
             document.getElementById('modal-letter-sender').textContent = letter.sender ? `• ${letter.sender}` : '';
@@ -1695,143 +1296,126 @@
 
             const imgWrap = document.getElementById('modal-letter-image-wrap');
             const imgEl = document.getElementById('modal-letter-image');
-            if (letter.image && letter.image.trim() !== '') {
-                imgEl.src = letter.image.trim();
-                imgWrap.classList.remove('hidden');
-            } else {
-                imgWrap.classList.add('hidden');
-                imgEl.src = '';
-            }
+            const hasImage = letter.image && letter.image.trim() !== '';
+            imgEl.src = hasImage ? letter.image.trim() : '';
+            imgWrap.classList.toggle('hidden', !hasImage);
 
-            document.getElementById('letter-modal').classList.remove('hidden');
+            setVisible('letter-modal', true, 'flex');
         }
 
         function closeLetterModal() {
-            document.getElementById('letter-modal').classList.add('hidden');
+            setVisible('letter-modal', false, 'flex');
             if (currentlyOpenedLetterIndex !== null && candlesBlownOut) {
-                const idxToRespawn = currentlyOpenedLetterIndex;
+                const idx = currentlyOpenedLetterIndex;
                 currentlyOpenedLetterIndex = null;
-                setTimeout(() => {
-                    spawnSingleWishBalloon(idxToRespawn, 120);
-                }, 220);
+                setTimeout(() => spawnSingleWishBalloon(idx, 120), 220);
             } else {
                 currentlyOpenedLetterIndex = null;
             }
         }
 
-        function playHappyBirthdaySynth() {
-            try {
-                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                if (!audioCtx) audioCtx = new AudioContextClass();
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-
-                const notes = [
-                    [261.63, 0.35], [261.63, 0.25], [293.66, 0.6], [261.63, 0.6], [349.23, 0.6], [329.63, 1.1],
-                    [261.63, 0.35], [261.63, 0.25], [293.66, 0.6], [261.63, 0.6], [392.00, 0.6], [349.23, 1.1],
-                    [261.63, 0.35], [261.63, 0.25], [523.25, 0.6], [440.00, 0.6], [349.23, 0.6], [329.63, 0.6], [293.66, 1.0],
-                    [466.16, 0.35], [466.16, 0.25], [440.00, 0.6], [349.23, 0.6], [392.00, 0.6], [349.23, 1.3]
-                ];
-
-                let step = 0;
-                isPlayingMusic = true;
-                updateMusicButtonUI();
-
-                function scheduleNextNote() {
-                    if (!isPlayingMusic) return;
-                    const [freq, dur] = notes[step % notes.length];
-                    playBellNote(freq, dur);
-                    step++;
-                    const pauseMs = (step % notes.length === 0) ? 1400 : dur * 780;
-                    synthTimer = setTimeout(scheduleNextNote, pauseMs);
-                }
-
-                scheduleNextNote();
-            } catch (e) {
-                console.warn("Trình duyệt chưa hỗ trợ Web Audio:", e);
+        function startCelebrationMusic() {
+            stopAllAudio();
+            const audioSource = (window.appConfig?.audioData || '').trim();
+            if (audioSource) {
+                try {
+                    customAudioPlayer = new Audio(audioSource);
+                    customAudioPlayer.loop = true;
+                    customAudioPlayer.play()
+                        .then(() => { isPlayingMusic = true; updateMusicButtonUI(); })
+                        .catch(() => playHappyBirthdaySynth());
+                    return;
+                } catch {}
             }
+            playHappyBirthdaySynth();
         }
 
-        function playBellNote(freq, duration) {
-            if (!audioCtx) return;
-            const now = audioCtx.currentTime;
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
+        function playHappyBirthdaySynth() {
+            const ctx = getAudioContext();
+            if (!ctx) return;
 
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, now);
+            const notes = [
+                [261.63, 0.35], [261.63, 0.25], [293.66, 0.6], [261.63, 0.6], [349.23, 0.6], [329.63, 1.1],
+                [261.63, 0.35], [261.63, 0.25], [293.66, 0.6], [261.63, 0.6], [392.00, 0.6], [349.23, 1.1],
+                [261.63, 0.35], [261.63, 0.25], [523.25, 0.6], [440.00, 0.6], [349.23, 0.6], [329.63, 0.6], [293.66, 1.0],
+                [466.16, 0.35], [466.16, 0.25], [440.00, 0.6], [349.23, 0.6], [392.00, 0.6], [349.23, 1.3]
+            ];
 
-            gain.gain.setValueAtTime(0.001, now);
-            gain.gain.exponentialRampToValueAtTime(0.16, now + 0.03);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + duration * 1.1);
+            let step = 0;
+            isPlayingMusic = true;
+            updateMusicButtonUI();
 
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
+            const scheduleNextNote = () => {
+                if (!isPlayingMusic) return;
+                const [freq, dur] = notes[step % notes.length];
+                const now = ctx.currentTime;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
 
-            osc.start(now);
-            osc.stop(now + duration * 1.15);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now);
+                gain.gain.setValueAtTime(0.001, now);
+                gain.gain.exponentialRampToValueAtTime(0.16, now + 0.03);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + dur * 1.1);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + dur * 1.15);
+
+                step++;
+                synthTimer = setTimeout(scheduleNextNote, (step % notes.length === 0) ? 1400 : dur * 780);
+            };
+            scheduleNextNote();
         }
 
         function playPopSound() {
-            try {
-                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                if (!audioCtx) audioCtx = new AudioContextClass();
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-                const now = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(320, now);
-                osc.frequency.exponentialRampToValueAtTime(90, now + 0.09);
-                gain.gain.setValueAtTime(0.2, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start(now);
-                osc.stop(now + 0.1);
-            } catch (e) {}
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(320, now);
+            osc.frequency.exponentialRampToValueAtTime(90, now + 0.09);
+            gain.gain.setValueAtTime(0.2, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.1);
         }
 
         function stopAllAudio() {
             isPlayingMusic = false;
             if (customAudioPlayer) {
                 customAudioPlayer.pause();
-                customAudioPlayer.currentTime = 0;
                 customAudioPlayer = null;
             }
-            if (synthTimer) {
-                clearTimeout(synthTimer);
-                synthTimer = null;
-            }
+            if (synthTimer) clearTimeout(synthTimer);
+            synthTimer = null;
+
             const testBtn = document.getElementById('btn-test-audio');
-            if (testBtn) {
-                testBtn.innerHTML = `<i class="fa-solid fa-play"></i><span>Nghe thử nhạc hiện tại</span>`;
-            }
+            if (testBtn) testBtn.innerHTML = `<i class="fa-solid fa-play"></i><span>Nghe thử nhạc hiện tại</span>`;
             updateMusicButtonUI();
         }
 
         function toggleAudioPlayback() {
-            if (isPlayingMusic) {
-                stopAllAudio();
-            } else {
-                startCelebrationMusic();
-            }
+            isPlayingMusic ? stopAllAudio() : startCelebrationMusic();
         }
 
         function updateMusicButtonUI() {
             const icon = document.getElementById('music-icon');
             const label = document.getElementById('music-label');
             if (!icon) return;
-            if (isPlayingMusic) {
-                icon.className = 'fa-solid fa-volume-high text-emerald-300 animate-pulse';
-                if (label) label.textContent = 'Đang phát nhạc';
-            } else {
-                icon.className = 'fa-solid fa-volume-xmark text-white/50';
-                if (label) label.textContent = 'Bật nhạc';
-            }
+            icon.className = isPlayingMusic
+                ? 'fa-solid fa-volume-high text-emerald-300 animate-pulse'
+                : 'fa-solid fa-volume-xmark text-white/50';
+            if (label) label.textContent = isPlayingMusic ? 'Đang phát nhạc' : 'Bật nhạc';
         }
 
         // =====================================================================
-        // CREATOR: CHỈNH SỬA NỘI DUNG, UPLOAD FILE & LƯU ĐÁM MÂY
+        // CREATOR DASHBOARD
         // =====================================================================
         let draftLetters = [];
         let draftAudioData = "";
@@ -1839,7 +1423,7 @@
 
         function populateCreatorForm() {
             const cfg = window.appConfig || {};
-            document.getElementById('cfg-viewer-pass').value = cfg.viewerPassword || 'sinhnhat';
+            document.getElementById('cfg-viewer-pass').value = cfg.viewerPassword || '21112026';
             document.getElementById('cfg-creator-pass').value = cfg.creatorPassword || 'admin123';
             document.getElementById('cfg-recipient').value = cfg.recipientLabel || '';
             document.getElementById('cfg-main-title').value = cfg.mainTitle || '';
@@ -1850,14 +1434,10 @@
 
             const urlInput = document.getElementById('cfg-audio-url');
             const statusEl = document.getElementById('audio-file-status');
-            if (draftAudioData.startsWith('data:audio')) {
-                urlInput.value = '';
-                statusEl.textContent = `✓ Đã nạp file âm thanh: ${draftAudioName || 'Nhạc tải lên'}`;
-                statusEl.classList.remove('hidden');
-            } else {
-                urlInput.value = draftAudioData;
-                statusEl.classList.add('hidden');
-            }
+            const isDataAudio = draftAudioData.startsWith('data:audio');
+            urlInput.value = isDataAudio ? '' : draftAudioData;
+            statusEl.textContent = isDataAudio ? `✓ Đã nạp file âm thanh: ${draftAudioName || 'Nhạc tải lên'}` : '';
+            statusEl.classList.toggle('hidden', !isDataAudio);
 
             draftLetters = JSON.parse(JSON.stringify(cfg.letters || []));
             renderCreatorLetters();
@@ -1866,15 +1446,13 @@
         function handleAudioUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
-
             if (file.size > 750 * 1024) {
-                showToast("File âm thanh hơi lớn (>750KB). Hãy chọn file ngắn hơn hoặc dán link nhạc MP3!", "error");
                 event.target.value = '';
-                return;
+                return showToast("File âm thanh hơi lớn (>750KB). Hãy chọn file ngắn hơn hoặc dán link MP3!", "error");
             }
 
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = (e) => {
                 draftAudioData = e.target.result;
                 draftAudioName = file.name;
                 document.getElementById('cfg-audio-url').value = '';
@@ -1887,16 +1465,14 @@
         }
 
         function clearUploadedAudioIfUrlTyped() {
-            const val = document.getElementById('cfg-audio-url').value.trim();
-            draftAudioData = val;
+            draftAudioData = document.getElementById('cfg-audio-url').value.trim();
             draftAudioName = '';
             document.getElementById('audio-file-status').classList.add('hidden');
         }
 
         function resetToDefaultSynthMusic() {
             stopAllAudio();
-            draftAudioData = '';
-            draftAudioName = '';
+            draftAudioData = draftAudioName = '';
             document.getElementById('cfg-audio-url').value = '';
             document.getElementById('audio-file-input').value = '';
             document.getElementById('audio-file-status').classList.add('hidden');
@@ -1904,122 +1480,99 @@
         }
 
         function testCreatorAudio() {
-            if (isPlayingMusic) {
-                stopAllAudio();
-                return;
-            }
+            if (isPlayingMusic) return stopAllAudio();
             const urlVal = document.getElementById('cfg-audio-url').value.trim();
-            const activeAudio = draftAudioData.startsWith('data:audio') ? draftAudioData : urlVal;
-
             const prevAudio = window.appConfig.audioData;
-            window.appConfig.audioData = activeAudio;
+            window.appConfig.audioData = draftAudioData.startsWith('data:audio') ? draftAudioData : urlVal;
             startCelebrationMusic();
             window.appConfig.audioData = prevAudio;
-
             document.getElementById('btn-test-audio').innerHTML = `<i class="fa-solid fa-stop"></i><span>Dừng nghe thử</span>`;
         }
 
         function renderCreatorLetters() {
             const container = document.getElementById('creator-letters-list');
-            container.innerHTML = '';
-
-            if (draftLetters.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-8 rounded-2xl bg-black/20 border border-dashed border-white/15 text-sm text-white/60">
-                        Chưa có bức thư nào. Hãy bấm <strong>"Thêm màu bóng & lời chúc"</strong> để tạo lời chúc!
-                    </div>
-                `;
+            if (!draftLetters.length) {
+                container.innerHTML = `<div class="text-center py-8 rounded-2xl bg-black/20 border border-dashed border-white/15 text-sm text-white/60">Chưa có bức thư nào. Hãy bấm <strong>"Thêm màu bóng & lời chúc"</strong> để tạo lời chúc!</div>`;
                 return;
             }
 
-            draftLetters.forEach((letter, index) => {
+            container.innerHTML = draftLetters.map((letter, index) => {
                 const cInfo = getBalloonColorInfo(letter.color);
                 const activeKey = Object.keys(BALLOON_COLORS).find(k => BALLOON_COLORS[k] === cInfo) || 'pink';
 
-                const colorButtonsHtml = Object.entries(BALLOON_COLORS).map(([key, info]) => {
-                    const isSelected = key === activeKey;
-                    return `
-                        <button type="button" onclick="selectLetterBalloonColor(${index}, '${key}')"
-                            title="${info.name}"
-                            class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-[11px] font-semibold transition cursor-pointer ${isSelected ? 'bg-white/20 border-white text-white shadow-md scale-105' : 'bg-white/5 border-white/15 text-white/70 hover:bg-white/15'}">
-                            <span class="w-3.5 h-3.5 rounded-full shrink-0 border border-white/80 shadow-sm" style="background: radial-gradient(circle at 30% 30%, ${info.light}, ${info.dark});"></span>
-                            <span>${info.name.replace('Bóng ', '')}</span>
-                        </button>
-                    `;
-                }).join('');
+                const colorButtons = Object.entries(BALLOON_COLORS).map(([key, info]) => `
+                    <button type="button" onclick="selectLetterBalloonColor(${index}, '${key}')" title="${info.name}"
+                        class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-[11px] font-semibold transition cursor-pointer ${key === activeKey ? 'bg-white/20 border-white text-white shadow-md scale-105' : 'bg-white/5 border-white/15 text-white/70 hover:bg-white/15'}">
+                        <span class="w-3.5 h-3.5 rounded-full shrink-0 border border-white/80" style="background: radial-gradient(circle at 30% 30%, ${info.light}, ${info.dark});"></span>
+                        <span>${info.name.replace('Bóng ', '')}</span>
+                    </button>
+                `).join('');
 
-                const item = document.createElement('div');
-                item.className = 'p-5 rounded-2xl bg-black/30 border border-white/15 space-y-3.5 relative';
-                item.innerHTML = `
-                    <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
-                        <div class="flex items-center gap-2">
-                            <span class="w-4 h-4 rounded-full border border-white shadow" style="background: radial-gradient(circle at 30% 30%, ${cInfo.light}, ${cInfo.dark});"></span>
-                            <span class="text-xs font-bold uppercase tracking-wider text-rose-300">
-                                Lời chúc #${index + 1} • ${cInfo.name}
-                            </span>
+                return `
+                    <div class="p-5 rounded-2xl bg-black/30 border border-white/15 space-y-3.5">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+                            <div class="flex items-center gap-2">
+                                <span class="w-4 h-4 rounded-full border border-white shadow" style="background: radial-gradient(circle at 30% 30%, ${cInfo.light}, ${cInfo.dark});"></span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-rose-300">Lời chúc #${index + 1} • ${cInfo.name}</span>
+                            </div>
+                            <button type="button" onclick="removeLetterCard(${index})" class="text-xs text-rose-400 hover:text-rose-300 px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 transition cursor-pointer">
+                                <i class="fa-solid fa-trash-can mr-1"></i>Xóa
+                            </button>
                         </div>
-                        <button type="button" onclick="removeLetterCard(${index})" class="text-xs text-rose-400 hover:text-rose-300 px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 transition cursor-pointer">
-                            <i class="fa-solid fa-trash-can mr-1"></i>Xóa
-                        </button>
-                    </div>
 
-                    <div>
-                        <label class="block text-[11px] text-pink-200/80 mb-1.5">Chọn màu quả bóng bay gắn với lời chúc này:</label>
-                        <div class="flex flex-wrap gap-1.5">
-                            ${colorButtonsHtml}
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-[11px] text-pink-200/80 mb-1">Tiêu đề lời chúc</label>
-                            <input type="text" value="${escapeAttr(letter.title)}" oninput="updateDraftLetter(${index}, 'title', this.value)"
-                                class="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/15 focus:border-pink-400 outline-none text-white text-xs sm:text-sm" placeholder="VD: Gửi tuổi 20 rực rỡ">
+                            <label class="block text-[11px] text-pink-200/80 mb-1.5">Chọn màu bóng bay:</label>
+                            <div class="flex flex-wrap gap-1.5">${colorButtons}</div>
                         </div>
-                        <div>
-                            <label class="block text-[11px] text-pink-200/80 mb-1">Người gửi / Dòng phụ</label>
-                            <input type="text" value="${escapeAttr(letter.sender)}" oninput="updateDraftLetter(${index}, 'sender', this.value)"
-                                class="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/15 focus:border-pink-400 outline-none text-white text-xs sm:text-sm" placeholder="VD: Từ người thương">
-                        </div>
-                    </div>
 
-                    <div>
-                        <label class="block text-[11px] text-pink-200/80 mb-1">Nội dung lời chúc khi ấn vào quả bóng màu này</label>
-                        <textarea rows="3" oninput="updateDraftLetter(${index}, 'content', this.value)"
-                            class="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-pink-400 outline-none text-white text-xs sm:text-sm leading-relaxed"
-                            placeholder="Viết những lời chúc chân thành nhất tại đây...">${escapeHtml(letter.content)}</textarea>
-                    </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] text-pink-200/80 mb-1">Tiêu đề lời chúc</label>
+                                <input type="text" value="${escapeAttr(letter.title)}" oninput="updateDraftLetter(${index}, 'title', this.value)"
+                                    class="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/15 focus:border-pink-400 outline-none text-white text-xs sm:text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-pink-200/80 mb-1">Người gửi / Dòng phụ</label>
+                                <input type="text" value="${escapeAttr(letter.sender)}" oninput="updateDraftLetter(${index}, 'sender', this.value)"
+                                    class="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/15 focus:border-pink-400 outline-none text-white text-xs sm:text-sm">
+                            </div>
+                        </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center pt-1">
                         <div>
-                            <label class="block text-[11px] text-pink-200/80 mb-1">Đính kèm ảnh kỷ niệm (Tải ảnh lên, tùy chọn)</label>
-                            <input type="file" accept="image/*" onchange="handleLetterImageUpload(event, ${index})"
-                                class="block w-full text-[11px] text-white/75 file:mr-2.5 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-pink-500/80 file:text-white hover:file:bg-pink-500 cursor-pointer">
+                            <label class="block text-[11px] text-pink-200/80 mb-1">Nội dung lời chúc</label>
+                            <textarea rows="3" oninput="updateDraftLetter(${index}, 'content', this.value)"
+                                class="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-pink-400 outline-none text-white text-xs sm:text-sm leading-relaxed">${escapeHtml(letter.content)}</textarea>
                         </div>
-                        <div>
-                            <label class="block text-[11px] text-pink-200/80 mb-1">Hoặc dán link hình ảnh (URL)</label>
-                            <input type="url" value="${letter.image && !letter.image.startsWith('data:') ? escapeAttr(letter.image) : ''}"
-                                oninput="updateDraftLetter(${index}, 'image', this.value)"
-                                class="w-full px-3 py-1.5 rounded-xl bg-white/5 border border-white/15 focus:border-pink-400 outline-none text-white text-xs"
-                                placeholder="https://example.com/ky-niem.jpg">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center pt-1">
+                            <div>
+                                <label class="block text-[11px] text-pink-200/80 mb-1">Tải ảnh kỷ niệm (tùy chọn)</label>
+                                <input type="file" accept="image/*" onchange="handleLetterImageUpload(event, ${index})"
+                                    class="block w-full text-[11px] text-white/75 file:mr-2.5 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-pink-500/80 file:text-white hover:file:bg-pink-500 cursor-pointer">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-pink-200/80 mb-1">Hoặc dán link hình ảnh (URL)</label>
+                                <input type="url" value="${letter.image && !letter.image.startsWith('data:') ? escapeAttr(letter.image) : ''}"
+                                    oninput="updateDraftLetter(${index}, 'image', this.value)"
+                                    class="w-full px-3 py-1.5 rounded-xl bg-white/5 border border-white/15 focus:border-pink-400 outline-none text-white text-xs"
+                                    placeholder="https://example.com/ky-niem.jpg">
+                            </div>
                         </div>
+                        ${letter.image ? `
+                            <div class="flex items-center gap-3 pt-1">
+                                <img src="${letter.image}" class="w-12 h-12 rounded-lg object-cover border border-white/20" onerror="this.style.display='none'">
+                                <button type="button" onclick="removeLetterImage(${index})" class="text-[11px] text-rose-300 hover:underline cursor-pointer">Gỡ ảnh đính kèm</button>
+                            </div>
+                        ` : ''}
                     </div>
-                    ${letter.image ? `
-                        <div class="flex items-center gap-3 pt-1">
-                            <img src="${letter.image}" class="w-12 h-12 rounded-lg object-cover border border-white/20" onerror="this.style.display='none'">
-                            <button type="button" onclick="removeLetterImage(${index})" class="text-[11px] text-rose-300 hover:underline cursor-pointer">Gỡ ảnh đính kèm</button>
-                        </div>
-                    ` : ''}
                 `;
-                container.appendChild(item);
-            });
+            }).join('');
         }
 
         function selectLetterBalloonColor(index, colorKey) {
-            if (draftLetters[index]) {
-                draftLetters[index].color = colorKey;
-                renderCreatorLetters();
-            }
+            if (!draftLetters[index]) return;
+            draftLetters[index].color = colorKey;
+            renderCreatorLetters();
         }
 
         function addNewLetterCard() {
@@ -2041,43 +1594,28 @@
         }
 
         function updateDraftLetter(index, field, value) {
-            if (draftLetters[index]) {
-                draftLetters[index][field] = value;
-            }
+            if (draftLetters[index]) draftLetters[index][field] = value;
         }
 
         function removeLetterImage(index) {
-            if (draftLetters[index]) {
-                draftLetters[index].image = '';
-                renderCreatorLetters();
-            }
+            if (!draftLetters[index]) return;
+            draftLetters[index].image = '';
+            renderCreatorLetters();
         }
 
         function handleLetterImageUpload(event, index) {
             const file = event.target.files[0];
             if (!file) return;
-
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = (e) => {
                 const img = new Image();
-                img.onload = function() {
+                img.onload = () => {
                     const canvas = document.createElement('canvas');
                     const maxDim = 650;
-                    let w = img.width;
-                    let h = img.height;
-                    if (w > maxDim || h > maxDim) {
-                        if (w > h) {
-                            h = Math.round((h * maxDim) / w);
-                            w = maxDim;
-                        } else {
-                            w = Math.round((w * maxDim) / h);
-                            h = maxDim;
-                        }
-                    }
-                    canvas.width = w;
-                    canvas.height = h;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, w, h);
+                    const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+                    canvas.width = Math.round(img.width * scale);
+                    canvas.height = Math.round(img.height * scale);
+                    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
                     draftLetters[index].image = canvas.toDataURL('image/jpeg', 0.72);
                     renderCreatorLetters();
                     showToast("Đã đính kèm ảnh kỷ niệm!", "success");
@@ -2090,7 +1628,6 @@
         function buildConfigFromForm() {
             const viewerPass = document.getElementById('cfg-viewer-pass').value.trim();
             const creatorPass = document.getElementById('cfg-creator-pass').value.trim();
-
             if (!viewerPass || !creatorPass) {
                 showToast("Mật khẩu Người xem và Người tạo không được để trống!", "error");
                 return null;
@@ -2101,15 +1638,13 @@
             }
 
             const urlVal = document.getElementById('cfg-audio-url').value.trim();
-            const finalAudio = draftAudioData.startsWith('data:audio') ? draftAudioData : urlVal;
-
             return {
                 viewerPassword: viewerPass,
                 creatorPassword: creatorPass,
-                recipientLabel: document.getElementById('cfg-recipient').value.trim() || "Dành tặng người đặc biệt ✨",
+                recipientLabel: document.getElementById('cfg-recipient').value.trim() || "Chúc mừng Dương đến với tuối 16 ✨",
                 mainTitle: document.getElementById('cfg-main-title').value.trim() || "Chúc Mừng Sinh Nhật!",
                 subMessage: document.getElementById('cfg-sub-message').value.trim(),
-                audioData: finalAudio,
+                audioData: draftAudioData.startsWith('data:audio') ? draftAudioData : urlVal,
                 audioName: draftAudioName,
                 letters: draftLetters
             };
@@ -2118,7 +1653,6 @@
         async function saveCreatorConfig() {
             const newConfig = buildConfigFromForm();
             if (!newConfig) return;
-
             const btn = document.getElementById('btn-save-all');
             const oldHtml = btn.innerHTML;
             btn.disabled = true;
@@ -2127,10 +1661,7 @@
             const ok = await window.persistConfigToCloud(newConfig);
             btn.disabled = false;
             btn.innerHTML = oldHtml;
-
-            if (ok) {
-                showToast("Đã lưu mọi thay đổi thành công! 🎉", "success");
-            }
+            if (ok) showToast("Đã lưu mọi thay đổi thành công! 🎉", "success");
         }
 
         function previewAsViewer() {
@@ -2138,46 +1669,29 @@
             if (!newConfig) return;
             window.appConfig = newConfig;
             switchView('viewer');
-            showToast("Đang xem trước giao diện người nhận. Bấm 'Đổi mật khẩu truy cập' ở góc trên để quay lại.", "info");
+            showToast("Đang xem trước giao diện người nhận.", "info");
         }
 
         function copyShareLink() {
-            const viewerPass = (document.getElementById('cfg-viewer-pass')?.value || window.appConfig?.viewerPassword || 'sinhnhat').trim();
-            const baseUrl = window.location.href.split('#')[0];
-            const shareText = `Mở hộp quà sinh nhật tại: ${baseUrl} — Mật khẩu: ${viewerPass}`;
-
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(shareText).then(() => {
-                    showToast(`Đã copy link & mật khẩu người xem (${viewerPass})!`, "success");
-                }).catch(() => {
-                    showToast(`Mật khẩu người xem hiện tại: ${viewerPass}`, "info");
-                });
+            const viewerPass = (document.getElementById('cfg-viewer-pass')?.value || window.appConfig?.viewerPassword || '21112026').trim();
+            const shareText = `Mở hộp quà sinh nhật tại: ${window.location.href.split('#')[0]} — Mật khẩu: ${viewerPass}`;
+            if (navigator.clipboard?.writeText) {
+                navigator.clipboard.writeText(shareText)
+                    .then(() => showToast(`Đã copy link & mật khẩu người xem (${viewerPass})!`, "success"))
+                    .catch(() => showToast(`Mật khẩu người xem hiện tại: ${viewerPass}`, "info"));
             } else {
                 showToast(`Mật khẩu người xem hiện tại: ${viewerPass}`, "info");
             }
         }
 
-        function escapeHtml(str) {
-            if (!str) return '';
-            return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;');
-        }
-
-        function escapeAttr(str) {
-            return escapeHtml(str).replace(/'/g, '&#39;');
-        }
+        const escapeHtml = str => String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        const escapeAttr = str => escapeHtml(str).replace(/'/g, '&#39;');
 
         window.addEventListener('DOMContentLoaded', () => {
             createStarfield();
             switchView('login');
         });
-
-        window.addEventListener('resize', () => {
-            createStarfield();
-        });
+        window.addEventListener('resize', createStarfield);
     </script>
 </body>
 </html>
